@@ -15,19 +15,14 @@ import javax.persistence.Persistence;
 public class Conexion implements IConexion{
   
     private EntityManagerFactory emf;
-    private EntityManager em;
     private String nombrePersistencia;
 
     public Conexion(String nombrePersistencia) {
         this.emf = Persistence.createEntityManagerFactory(nombrePersistencia);
-        this.em = emf.createEntityManager();
     }
     
     @Override
     public EntityManager getEM() {
-        if (em == null || !em.isOpen()) {
-            em = emf.createEntityManager();
-        }
-        return em;
+        return emf.createEntityManager();
     }
 }

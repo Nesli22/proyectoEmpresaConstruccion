@@ -41,18 +41,21 @@ public class ActivoDAO {
     }
    
     public List<Activo> verificarEstado() {
-        EntityManager em = conexion.getEM();
+        EntityManager entiyManager = null;
         List<Activo> activos = new ArrayList<>();
         try {
-            em.getTransaction().begin();
-            activos = em.createQuery("SELECT a FROM Activo a", Activo.class).getResultList();
-            em.getTransaction().commit(); 
+            entiyManager = conexion.getEM();
+            entiyManager.getTransaction().begin();
+            activos = entiyManager.createQuery("SELECT a FROM Activo a", Activo.class).getResultList();
+            entiyManager.getTransaction().commit(); 
+            entiyManager.close();
         } catch (Exception e) {
             e.printStackTrace();
-            if (em != null && em.getTransaction().isActive()) {
-                em.getTransaction().rollback();
+        } finally{
+            if (entiyManager != null && entiyManager.getTransaction().isActive()) {
+                entiyManager.close();
             }
-        } 
+        }
         return activos;
     }
 }

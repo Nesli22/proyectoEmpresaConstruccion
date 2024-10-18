@@ -236,6 +236,8 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
 
         boolean encontrado = false;
 
+         
+        
         for (Activo activo : listaActivo) {
             if (activo.getNombre().toLowerCase().contains(busqueda.toLowerCase())
                     || activo.getNumSerie().toLowerCase().contains(busqueda.toLowerCase())) {
@@ -247,7 +249,7 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
         }
 
         jt.setModel(modelo);
-
+        
         if (!encontrado) {
             JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
         }
