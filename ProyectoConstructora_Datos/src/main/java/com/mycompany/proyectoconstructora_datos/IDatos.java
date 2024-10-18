@@ -14,5 +14,6 @@ import java.util.List;
  */
 public interface IDatos {
       public Boolean registrarActivo(Activo activo);
+      public List<Activo> verificarEstado();
       public List<Persona> recuperarPersonas();
 }

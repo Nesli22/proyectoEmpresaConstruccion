@@ -15,6 +15,8 @@ import java.util.List;
 public interface INegocio {
 
     public Boolean registrarActivo(Activo activo);
-
+    
+    public List<Activo> verificarEstados();
+  
     public List<Persona> recuperarPersonas();
 }

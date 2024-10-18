@@ -26,5 +26,10 @@ public class FachadaDatos implements IDatos{
     public List<Persona> recuperarPersonas() {
        return persona.obtenerPersonas();
     }
+
+    @Override
+    public List<Activo> verificarEstado() {
+        return activ.verificarEstado();
+    }
     
 }

@@ -67,8 +67,7 @@ public class FrmMenu extends javax.swing.JFrame {
         btnConsultarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnConsultarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnConsultarActivo.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarActivo.setText("Consultar Activo");
-        btnConsultarActivo.setEnabled(false);
+        btnConsultarActivo.setText("Consultar estado del Activo");
         btnConsultarActivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnConsultarActivoMouseEntered(evt);
@@ -146,10 +145,8 @@ public class FrmMenu extends javax.swing.JFrame {
     private void btnRegistrarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActivoActionPerformed
 
         FrmMenuControlarRegistro frmRegistrarActivos = new FrmMenuControlarRegistro();
-dispose();
+        dispose();
         frmRegistrarActivos.setVisible(true);
-
-        
 
     }//GEN-LAST:event_btnRegistrarActivoActionPerformed
 
@@ -162,7 +159,9 @@ dispose();
     }//GEN-LAST:event_btnConsultarActivoMouseExited
 
     private void btnConsultarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActivoActionPerformed
-
+        FrmVerificarEstado frmVerificarEstado = new FrmVerificarEstado();
+        dispose();
+        frmVerificarEstado.setVisible(true);
     }//GEN-LAST:event_btnConsultarActivoActionPerformed
 
     private void btnModificarActivoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarActivoMouseEntered
