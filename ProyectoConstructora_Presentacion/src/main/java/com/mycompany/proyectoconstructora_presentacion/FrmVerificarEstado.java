@@ -6,7 +6,11 @@ import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
 import com.mycompany.proyectoconstructora_negocio.INegocio;
 import java.awt.Color;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,13 +20,14 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVerificarEstado extends javax.swing.JFrame {
 
     INegocio negocio;
+    List<Activo> listaActivo = null;
     
     public FrmVerificarEstado() {
+       
         initComponents();
         this.setLocationRelativeTo(null);
         this.negocio = new FachadaNegocio();
-        this.rellenarTablaActivos(tablaActivos);
-        
+        this.listaActivo = this.negocio.verificarEstados();     
     }
 
     /**
@@ -35,35 +40,37 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnVolver = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaActivos = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
+        btnVolver1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnVolver.setBackground(new java.awt.Color(0, 153, 204));
-        btnVolver.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver.setText("Volver");
-        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnBuscar.setBackground(new java.awt.Color(0, 153, 204));
+        btnBuscar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolverMouseEntered(evt);
+                btnBuscarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolverMouseExited(evt);
+                btnBuscarMouseExited(evt);
             }
         });
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+                btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 110, -1));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -95,12 +102,34 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nombre", "Fecha Adquisicion", "Estado"
+                "Nombre", "Estado"
             }
         ));
         jScrollPane1.setViewportView(tablaActivos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 410, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 460, 100));
+
+        txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
+
+        btnVolver1.setBackground(new java.awt.Color(0, 153, 204));
+        btnVolver1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver1.setText("Volver");
+        btnVolver1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolver1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolver1MouseExited(evt);
+            }
+        });
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,25 +139,37 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered
-        btnVolver.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_btnVolverMouseEntered
+    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
+        btnBuscar.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnBuscarMouseEntered
 
-    private void btnVolverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseExited
-        btnVolver.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_btnVolverMouseExited
+    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
+        btnBuscar.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnBuscarMouseExited
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscarActivos();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolver1MouseEntered
+
+    private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolver1MouseExited
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         FrmMenu frmMenu = new FrmMenu();
         dispose();
-        frmMenu.setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+        frmMenu.setVisible(true);      
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,28 +205,63 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
             }
         });
     }
-    
-    public void rellenarTablaActivos(JTable jt) {
-        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
 
-        List<Activo> listaActivo = this.negocio.verificarEstados();
+    private void buscarActivos() {
+        String criterio = txtBuscar.getText().trim();
+
+        if (criterio.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un número de serie o nombre del activo para buscar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        txtBuscar.setText("Buscando...");
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrmVerificarEstado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SwingUtilities.invokeLater(() -> {
+                rellenarTablaActivos(tablaActivos, criterio);
+                txtBuscar.setText("");
+            });
+        }).start();
+    }
+   
+    private void rellenarTablaActivos(JTable jt, String busqueda) {
+        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+        modelo.setRowCount(0);
+
+        boolean encontrado = false;
 
         for (Activo activo : listaActivo) {
-            String nombre = activo.getNombre();
-            String fechaAdquisicion = activo.getFechaAdquisicion().toString();
-            String estado = activo.getEstado();
-            modelo.addRow(new Object[]{nombre, fechaAdquisicion, estado});
+            if (activo.getNombre().toLowerCase().contains(busqueda.toLowerCase())
+                    || activo.getNumSerie().toLowerCase().contains(busqueda.toLowerCase())) {
+                String nombre = activo.getNombre();
+                String estado = activo.getEstado();
+                modelo.addRow(new Object[]{nombre, estado});
+                encontrado = true;
+            }
         }
 
         jt.setModel(modelo);
-    }
 
+        if (!encontrado) {
+            JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+ 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnVolver1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaActivos;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

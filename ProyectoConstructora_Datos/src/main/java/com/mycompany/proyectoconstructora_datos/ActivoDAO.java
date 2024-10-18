@@ -17,7 +17,6 @@ import javax.persistence.EntityTransaction;
 public class ActivoDAO {
 
     private Conexion conexion;
-    private static EntityManager em;
     
     public ActivoDAO() {
         conexion = new Conexion("com.equipo6_proyectoEmpresaConstruccion_jar_1.0-SNAPSHOTPU");
@@ -40,24 +39,20 @@ public class ActivoDAO {
             return false;
         }
     }
-    
+   
     public List<Activo> verificarEstado() {
-        this.em = conexion.getEM();
+        EntityManager em = conexion.getEM();
         List<Activo> activos = new ArrayList<>();
         try {
             em.getTransaction().begin();
             activos = em.createQuery("SELECT a FROM Activo a", Activo.class).getResultList();
-            em.getTransaction().commit();
+            em.getTransaction().commit(); 
         } catch (Exception e) {
             e.printStackTrace();
-            if (em.getTransaction().isActive()) {
+            if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        } 
         return activos;
     }
 }
