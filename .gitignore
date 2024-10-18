@@ -25,3 +25,5 @@ replay_pid*
 /target/
 /Dominio/target/
 /ProyectoConstructora_Datos/target/
+/ProyectoConstructora_Negocio/target/
+/ProyectoConstructora_Presentacion/target/
