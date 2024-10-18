@@ -177,12 +177,16 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
         for (Activo activo : listaActivo) {
             String nombreActivo = activo.getNombre();
             String nombrePersonaAsignada = "";
-            
-            for (Persona persona : listaPersona) {
-                if (persona.getId().equals(activo.getResponsable().getId())) {
-                    nombrePersonaAsignada = persona.getNombre();
-                    break; 
+
+            if (activo.getResponsable() != null) {
+                for (Persona persona : listaPersona) {
+                    if (persona.getId().equals(activo.getResponsable().getId())) {
+                        nombrePersonaAsignada = persona.getNombre();
+                        break;
+                    }
                 }
+            } else {
+                nombrePersonaAsignada = "Sin responsable"; 
             }
 
             modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
