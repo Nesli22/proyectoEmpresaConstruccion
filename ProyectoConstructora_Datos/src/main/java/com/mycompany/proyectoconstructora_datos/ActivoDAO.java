@@ -5,6 +5,8 @@
 package com.mycompany.proyectoconstructora_datos;
 
 import Dominio.Activo;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
@@ -15,7 +17,8 @@ import javax.persistence.EntityTransaction;
 public class ActivoDAO {
 
     private Conexion conexion;
-
+    private static EntityManager em;
+    
     public ActivoDAO() {
         conexion = new Conexion("com.equipo6_proyectoEmpresaConstruccion_jar_1.0-SNAPSHOTPU");
     }
@@ -23,8 +26,6 @@ public class ActivoDAO {
     
     public boolean registrarActivo(Activo activo) {
         EntityManager em = conexion.getEM();
-      
-
         try {
             em.getTransaction().begin();
           
@@ -40,4 +41,23 @@ public class ActivoDAO {
         }
     }
     
+    public List<Activo> verificarEstado() {
+        this.em = conexion.getEM();
+        List<Activo> activos = new ArrayList<>();
+        try {
+            em.getTransaction().begin();
+            activos = em.createQuery("SELECT a FROM Activo a", Activo.class).getResultList();
+            em.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            if (em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return activos;
+    }
 }

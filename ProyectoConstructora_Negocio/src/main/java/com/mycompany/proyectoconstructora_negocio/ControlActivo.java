@@ -6,6 +6,7 @@ package com.mycompany.proyectoconstructora_negocio;
 import Dominio.Activo;
 import com.mycompany.proyectoconstructora_datos.FachadaDatos;
 import com.mycompany.proyectoconstructora_datos.IDatos;
+import java.util.List;
 
 
 /**
@@ -22,5 +23,9 @@ public class ControlActivo {
 
     public Boolean registarActivo(Activo activo) {
         return datos.registrarActivo(activo);
+    }
+    
+    public List<Activo> verificarEstados(){
+        return datos.verificarEstado();
     }
 }

@@ -26,5 +26,11 @@ public class FachadaNegocio implements INegocio {
     public List<Persona> recuperarPersonas() {
        return persona.recuperarPersonas();
     }
+
+    @Override
+    public List<Activo> verificarEstados() {
+       return this.activ.verificarEstados();
+    }
+
     
 }
