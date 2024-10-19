@@ -20,14 +20,12 @@ import javax.swing.table.DefaultTableModel;
 public class FrmVerificarEstado extends javax.swing.JFrame {
 
     INegocio negocio;
-    List<Activo> listaActivo = null;
     
     public FrmVerificarEstado() {
        
         initComponents();
         this.setLocationRelativeTo(null);
-        this.negocio = new FachadaNegocio();
-        this.listaActivo = this.negocio.verificarEstados();     
+        this.negocio = new FachadaNegocio();    
     }
 
     /**
@@ -236,7 +234,7 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
 
         boolean encontrado = false;
 
-         
+        List<Activo> listaActivo = this.negocio.verificarEstados();
         
         for (Activo activo : listaActivo) {
             if (activo.getNombre().toLowerCase().contains(busqueda.toLowerCase())
