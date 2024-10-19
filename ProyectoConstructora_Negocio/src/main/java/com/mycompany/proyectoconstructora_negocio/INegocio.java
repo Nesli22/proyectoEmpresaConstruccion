@@ -16,7 +16,7 @@ public interface INegocio {
 
     public Boolean registrarActivo(Activo activo);
     
-    public List<Activo> verificarEstados();
+    public List<Activo> consultarEstado(String criterio);
   
     public List<Persona> recuperarPersonas();
 }

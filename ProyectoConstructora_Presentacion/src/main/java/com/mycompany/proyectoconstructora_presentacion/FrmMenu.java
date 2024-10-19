@@ -190,7 +190,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActivoActionPerformed
 
     private void btnConsultarActivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActivo1ActionPerformed
-        FrmVerificarEstado frmVerificarEstado = new FrmVerificarEstado();
+        FrmConsultarEstado frmVerificarEstado = new FrmConsultarEstado();
         dispose();
         frmVerificarEstado.setVisible(true);
     }//GEN-LAST:event_btnConsultarActivo1ActionPerformed

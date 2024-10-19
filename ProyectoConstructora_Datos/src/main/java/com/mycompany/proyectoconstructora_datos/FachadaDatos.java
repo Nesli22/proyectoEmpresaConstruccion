@@ -28,8 +28,8 @@ public class FachadaDatos implements IDatos{
     }
 
     @Override
-    public List<Activo> verificarEstado() {
-        return activ.verificarEstado();
+    public List<Activo> consultarEstado(String criterio) {
+        return activ.consultarEstado(criterio);
     }
     
 }

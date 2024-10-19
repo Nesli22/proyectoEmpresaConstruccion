@@ -28,8 +28,8 @@ public class FachadaNegocio implements INegocio {
     }
 
     @Override
-    public List<Activo> verificarEstados() {
-       return this.activ.verificarEstados();
+    public List<Activo> consultarEstado(String criterio) {
+       return this.activ.consultarEstado(criterio);
     }
 
     

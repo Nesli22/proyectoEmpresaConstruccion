@@ -25,7 +25,7 @@ public class ControlActivo {
         return datos.registrarActivo(activo);
     }
     
-    public List<Activo> verificarEstados(){
-        return datos.verificarEstado();
+    public List<Activo> consultarEstado(String criterio){
+        return datos.consultarEstado(criterio);
     }
 }

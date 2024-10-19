@@ -169,30 +169,30 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
     }
     
     private void rellenarTabla(JTable jt) {
-        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
-
-        List<Activo> listaActivo = this.negocio.verificarEstados();
-        List<Persona> listaPersona = this.negocio.recuperarPersonas();
-
-        for (Activo activo : listaActivo) {
-            String nombreActivo = activo.getNombre();
-            String nombrePersonaAsignada = "";
-
-            if (activo.getResponsable() != null) {
-                for (Persona persona : listaPersona) {
-                    if (persona.getId().equals(activo.getResponsable().getId())) {
-                        nombrePersonaAsignada = persona.getNombre();
-                        break;
-                    }
-                }
-            } else {
-                nombrePersonaAsignada = "Sin responsable"; 
-            }
-
-            modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
-        }
-
-        jt.setModel(modelo);
+//        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+//
+////        List<Activo> listaActivo = this.negocio.verificarEstados();
+//        List<Persona> listaPersona = this.negocio.recuperarPersonas();
+//
+//        for (Activo activo : listaActivo) {
+//            String nombreActivo = activo.getNombre();
+//            String nombrePersonaAsignada = "";
+//
+//            if (activo.getResponsable() != null) {
+//                for (Persona persona : listaPersona) {
+//                    if (persona.getId().equals(activo.getResponsable().getId())) {
+//                        nombrePersonaAsignada = persona.getNombre();
+//                        break;
+//                    }
+//                }
+//            } else {
+//                nombrePersonaAsignada = "Sin responsable"; 
+//            }
+//
+//            modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
+//        }
+//
+//        jt.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

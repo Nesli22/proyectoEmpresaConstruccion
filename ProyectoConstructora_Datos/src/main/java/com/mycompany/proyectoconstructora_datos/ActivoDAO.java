@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -39,23 +40,30 @@ public class ActivoDAO {
             return false;
         }
     }
-   
-    public List<Activo> verificarEstado() {
-        EntityManager entiyManager = null;
-        List<Activo> activos = new ArrayList<>();
+
+    public List<Activo> consultarEstado(String criterio) {
+        EntityManager entityManager = null;
+        List<Activo> listaActivos = new ArrayList<>();
         try {
-            entiyManager = conexion.getEM();
-            entiyManager.getTransaction().begin();
-            activos = entiyManager.createQuery("SELECT a FROM Activo a", Activo.class).getResultList();
-            entiyManager.getTransaction().commit(); 
-            entiyManager.close();
+            entityManager = conexion.getEM();
+            entityManager.getTransaction().begin();
+
+            listaActivos = entityManager.createQuery(
+                    "SELECT a FROM Activo a WHERE a.numSerie LIKE :criterio OR a.nombre LIKE :criterio", Activo.class)
+                    .setParameter("criterio", "%" + criterio + "%")
+                    .getResultList();
+
+            entityManager.getTransaction().commit();
+            entityManager.close();
+        } catch (NoResultException e) {
+            System.out.println("No se encontró ningún activo con el criterio especificado.");
         } catch (Exception e) {
             e.printStackTrace();
-        } finally{
-            if (entiyManager != null && entiyManager.getTransaction().isActive()) {
-                entiyManager.close();
+        } finally {
+            if (entityManager != null && entityManager.getTransaction().isActive()) {
+                entityManager.close();
             }
         }
-        return activos;
+        return listaActivos;
     }
 }

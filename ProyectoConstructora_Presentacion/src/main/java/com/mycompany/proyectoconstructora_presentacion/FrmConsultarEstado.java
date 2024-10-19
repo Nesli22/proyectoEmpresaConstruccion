@@ -17,11 +17,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Rodrigo Gtz
  */
-public class FrmVerificarEstado extends javax.swing.JFrame {
+public class FrmConsultarEstado extends javax.swing.JFrame {
 
     INegocio negocio;
     
-    public FrmVerificarEstado() {
+    public FrmConsultarEstado() {
        
         initComponents();
         this.setLocationRelativeTo(null);
@@ -186,20 +186,21 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmVerificarEstado().setVisible(true);
+                new FrmConsultarEstado().setVisible(true);
             }
         });
     }
@@ -216,9 +217,9 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
 
         new Thread(() -> {
             try {
-                Thread.sleep(1000);
+                Thread.sleep(500);
             } catch (InterruptedException ex) {
-                Logger.getLogger(FrmVerificarEstado.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmConsultarEstado.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             SwingUtilities.invokeLater(() -> {
@@ -227,32 +228,26 @@ public class FrmVerificarEstado extends javax.swing.JFrame {
             });
         }).start();
     }
-   
+
     private void rellenarTablaActivos(JTable jt, String busqueda) {
         DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
         modelo.setRowCount(0);
 
-        boolean encontrado = false;
+        List<Activo> listaActivos = this.negocio.consultarEstado(busqueda);
 
-        List<Activo> listaActivo = this.negocio.verificarEstados();
-        
-        for (Activo activo : listaActivo) {
-            if (activo.getNombre().toLowerCase().contains(busqueda.toLowerCase())
-                    || activo.getNumSerie().toLowerCase().contains(busqueda.toLowerCase())) {
-                String nombre = activo.getNombre();
-                String estado = activo.getEstado();
+        if (listaActivos != null && !listaActivos.isEmpty()) {
+            for (Activo listaActivo : listaActivos) {
+                String nombre = listaActivo.getNombre();
+                String estado = listaActivo.getEstado();
+                           
                 modelo.addRow(new Object[]{nombre, estado});
-                encontrado = true;
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
         }
 
         jt.setModel(modelo);
-        
-        if (!encontrado) {
-            JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
-        }
     }
-    
  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
