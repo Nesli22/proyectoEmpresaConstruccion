@@ -232,31 +232,34 @@ public class FrmConsultarAsignado extends javax.swing.JFrame {
         }).start();
     }
 
-    
     private void rellenarTabla(JTable jt, String criterio) {
         DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
-    
+
         modelo.setRowCount(0);
 
         List<Activo> listaActivo = this.negocio.consultarEstado(criterio);
         List<Persona> listaPersona = this.negocio.recuperarPersonas();
 
-        for (Activo activo : listaActivo) {
-            String nombreActivo = activo.getNombre();
-            String nombrePersonaAsignada = "";
+        if (listaActivo != null && !listaActivo.isEmpty()) {
+            for (Activo activo : listaActivo) {
+                String nombreActivo = activo.getNombre();
+                String nombrePersonaAsignada = "";
 
-            if (activo.getResponsable() != null) {
-                for (Persona persona : listaPersona) {
-                    if (persona.getId().equals(activo.getResponsable().getId())) {
-                        nombrePersonaAsignada = persona.getNombre();
-                        break;
+                if (activo.getResponsable() != null) {
+                    for (Persona persona : listaPersona) {
+                        if (persona.getId().equals(activo.getResponsable().getId())) {
+                            nombrePersonaAsignada = persona.getNombre();
+                            break;
+                        }
                     }
+                } else {
+                    nombrePersonaAsignada = "Sin responsable";
                 }
-            } else {
-                nombrePersonaAsignada = "Sin responsable"; 
-            }
 
-            modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
+                modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
         }
 
         jt.setModel(modelo);
