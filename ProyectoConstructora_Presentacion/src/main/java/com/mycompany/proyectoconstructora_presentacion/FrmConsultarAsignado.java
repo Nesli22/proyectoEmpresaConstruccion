@@ -10,22 +10,25 @@ import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
 import com.mycompany.proyectoconstructora_negocio.INegocio;
 import java.awt.Color;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Rodrigo Gtz
  */
-public class FrmVerificarAsignado extends javax.swing.JFrame {
+public class FrmConsultarAsignado extends javax.swing.JFrame {
 
     INegocio negocio;
     
-    public FrmVerificarAsignado() {
+    public FrmConsultarAsignado() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.negocio = new FachadaNegocio();
-        this.rellenarTabla(tablaActivos);
     }
 
     /**
@@ -43,6 +46,8 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaActivos = new javax.swing.JTable();
+        txtBuscar = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,7 +71,7 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 110, -1));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 110, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -103,7 +108,29 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tablaActivos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 120, 410, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 460, 140));
+
+        txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
+
+        btnBuscar.setBackground(new java.awt.Color(0, 153, 204));
+        btnBuscar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseExited(evt);
+            }
+        });
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -113,7 +140,7 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
         );
 
         pack();
@@ -133,6 +160,18 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
         frmMenu.setVisible(true);
     }//GEN-LAST:event_btnVolverActionPerformed
 
+    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
+        btnBuscar.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnBuscarMouseEntered
+
+    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
+        btnBuscar.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnBuscarMouseExited
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscarActivo();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -150,59 +189,90 @@ public class FrmVerificarAsignado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmVerificarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmVerificarAsignado().setVisible(true);
+                new FrmConsultarAsignado().setVisible(true);
             }
         });
     }
     
-    private void rellenarTabla(JTable jt) {
-//        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
-//
-////        List<Activo> listaActivo = this.negocio.verificarEstados();
-//        List<Persona> listaPersona = this.negocio.recuperarPersonas();
-//
-//        for (Activo activo : listaActivo) {
-//            String nombreActivo = activo.getNombre();
-//            String nombrePersonaAsignada = "";
-//
-//            if (activo.getResponsable() != null) {
-//                for (Persona persona : listaPersona) {
-//                    if (persona.getId().equals(activo.getResponsable().getId())) {
-//                        nombrePersonaAsignada = persona.getNombre();
-//                        break;
-//                    }
-//                }
-//            } else {
-//                nombrePersonaAsignada = "Sin responsable"; 
-//            }
-//
-//            modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
-//        }
-//
-//        jt.setModel(modelo);
+    private void buscarActivo() {
+        String criterio = txtBuscar.getText().trim();
+
+        if (criterio.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor, ingresa un número de serie o nombre del activo para buscar.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        txtBuscar.setText("Buscando...");
+
+        new Thread(() -> {
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(FrmConsultarEstado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            SwingUtilities.invokeLater(() -> {
+                rellenarTabla(tablaActivos, criterio);
+                txtBuscar.setText("");
+            });
+        }).start();
+    }
+
+    
+    private void rellenarTabla(JTable jt, String criterio) {
+        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+    
+        modelo.setRowCount(0);
+
+        List<Activo> listaActivo = this.negocio.consultarEstado(criterio);
+        List<Persona> listaPersona = this.negocio.recuperarPersonas();
+
+        for (Activo activo : listaActivo) {
+            String nombreActivo = activo.getNombre();
+            String nombrePersonaAsignada = "";
+
+            if (activo.getResponsable() != null) {
+                for (Persona persona : listaPersona) {
+                    if (persona.getId().equals(activo.getResponsable().getId())) {
+                        nombrePersonaAsignada = persona.getNombre();
+                        break;
+                    }
+                }
+            } else {
+                nombrePersonaAsignada = "Sin responsable"; 
+            }
+
+            modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
+        }
+
+        jt.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaActivos;
+    private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 
+   
     
 }
