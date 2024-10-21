@@ -19,4 +19,6 @@ public interface INegocio {
     public List<Activo> consultarEstado(String criterio);
   
     public List<Persona> recuperarPersonas();
+    
+    public Boolean editarActivo(Activo activo);
 }

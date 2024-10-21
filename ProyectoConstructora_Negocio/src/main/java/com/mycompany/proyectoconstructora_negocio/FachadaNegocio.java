@@ -32,5 +32,10 @@ public class FachadaNegocio implements INegocio {
        return this.activ.consultarEstado(criterio);
     }
 
+    @Override
+    public Boolean editarActivo(Activo activo) {
+       return activ.editarActivo(activo);
+    }
+
     
 }
