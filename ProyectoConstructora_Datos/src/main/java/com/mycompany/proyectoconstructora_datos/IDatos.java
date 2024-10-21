@@ -16,4 +16,5 @@ public interface IDatos {
       public Boolean registrarActivo(Activo activo);
       public List<Activo> consultarEstado(String criterio);
       public List<Persona> recuperarPersonas();
+      public Boolean modificarActivo(Activo Activo);
 }

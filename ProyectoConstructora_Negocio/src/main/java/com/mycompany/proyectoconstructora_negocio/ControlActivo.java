@@ -28,4 +28,8 @@ public class ControlActivo {
     public List<Activo> consultarEstado(String criterio){
         return datos.consultarEstado(criterio);
     }
+    
+    public Boolean editarActivo(Activo activo){
+        return datos.modificarActivo(activo);
+    }
 }

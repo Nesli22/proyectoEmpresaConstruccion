@@ -31,5 +31,10 @@ public class FachadaDatos implements IDatos{
     public List<Activo> consultarEstado(String criterio) {
         return activ.consultarEstado(criterio);
     }
+
+    @Override
+    public Boolean modificarActivo(Activo Activo) {
+        return activ.modificarActivo(Activo);
+    }
     
 }
