@@ -20,7 +20,6 @@ import javax.persistence.Table;
  * @author IVAN
  */
 
-
 @Entity
 @Table(name = "Persona")
 public class Persona {

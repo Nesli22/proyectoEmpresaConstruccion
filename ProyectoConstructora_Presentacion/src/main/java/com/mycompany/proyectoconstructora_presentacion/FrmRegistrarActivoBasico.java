@@ -44,8 +44,6 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
 
         // Crear el objeto Activo
         Activo activo = new Activo(id, nombre, tipo, numeroSerie, fechaSeleccionada);
-        negocio.registrarActivo(activo);
-        // Registrar el activo utilizando el método de negocio
         // Registrar el activo utilizando el método de negocio
         if (negocio.registrarActivo(activo)) {
             JOptionPane.showMessageDialog(null, "Activo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
