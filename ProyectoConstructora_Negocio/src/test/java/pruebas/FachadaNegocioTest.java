@@ -4,6 +4,7 @@ import Dominio.Activo;
 import Dominio.Persona;
 import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
 import com.mycompany.proyectoconstructora_negocio.INegocio;
+import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -12,7 +13,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import java.util.Date;
-import java.time.Instant;
+import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Clase de prueba para verificar las funcionalidades de la clase
@@ -73,11 +75,14 @@ class FachadaNegocioTest {
     @Test
     @DisplayName("Consultar el estado del activo")
     void consultarEstadoTest() {
-        List<Activo> resultado = this.fachadaNegocio.consultarEstado("a");
+        Activo activoConsulta = this.crearActivoPrueba();
+        fachadaNegocio.registrarActivo(activoConsulta);
+        List<Activo> resultado = this.fachadaNegocio.consultarEstado("ActivoPrueba");
         assertNotNull(resultado, "El resultado no debería ser nulo");
         assertFalse(resultado.isEmpty(), "La lista de activos no debería estar vacía");
         boolean exito = resultado.stream().anyMatch(activo -> activo instanceof Activo);
         assertTrue(exito, "Se deben obtener activos correctamente de la base de datos");
+        assertEquals("Operativo", resultado.getLast().getEstado());
     }
 
     /**
@@ -101,6 +106,6 @@ class FachadaNegocioTest {
      * @return Un nuevo objeto Activo con valores predefinidos.
      */
     private Activo crearActivoPrueba() {
-        return new Activo(1L, "ActivoPrueba", "Herramienta", "54321", Date.from(Instant.now()));
+        return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
     }
 }
