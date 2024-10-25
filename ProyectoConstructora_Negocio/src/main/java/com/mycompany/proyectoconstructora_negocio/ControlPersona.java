@@ -6,7 +6,7 @@ package com.mycompany.proyectoconstructora_negocio;
 
 import Dominio.Persona;
 import com.mycompany.proyectoconstructora_datos.FachadaDatos;
-import com.mycompany.proyectoconstructora_datos.IDatos;
+import com.interfaces.proyectoconstructora_datos.IDatos;
 import java.util.List;
 
 /**

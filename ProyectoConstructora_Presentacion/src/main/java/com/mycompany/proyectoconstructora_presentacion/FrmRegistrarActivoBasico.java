@@ -6,7 +6,7 @@ package com.mycompany.proyectoconstructora_presentacion;
 
 import Dominio.Activo;
 import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
-import com.mycompany.proyectoconstructora_negocio.INegocio;
+import com.interfaces.proyectoconstructora_negocio.INegocio;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;

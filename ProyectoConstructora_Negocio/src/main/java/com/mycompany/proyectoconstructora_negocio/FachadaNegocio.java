@@ -4,6 +4,7 @@
  */
 package com.mycompany.proyectoconstructora_negocio;
 
+import com.interfaces.proyectoconstructora_negocio.INegocio;
 import Dominio.Activo;
 import Dominio.Persona;
 import java.util.List;

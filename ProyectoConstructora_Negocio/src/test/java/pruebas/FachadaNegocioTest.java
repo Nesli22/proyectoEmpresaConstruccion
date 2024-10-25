@@ -3,7 +3,7 @@ package pruebas;
 import Dominio.Activo;
 import Dominio.Persona;
 import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
-import com.mycompany.proyectoconstructora_negocio.INegocio;
+import com.interfaces.proyectoconstructora_negocio.INegocio;
 import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
