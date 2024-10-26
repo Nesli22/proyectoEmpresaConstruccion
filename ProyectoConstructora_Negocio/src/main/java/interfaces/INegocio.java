@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package InterfacesNegocio;
+package interfaces;
 
-import Dominio.Activo;
-import Dominio.Persona;
+import clases.dominio.Activo;
+import clases.dominio.Persona;
 import java.util.List;
 
 /**

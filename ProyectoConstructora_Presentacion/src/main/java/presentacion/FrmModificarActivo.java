@@ -1,10 +1,11 @@
+package presentacion;
 
-package ClasesPresentacion;
-
-import Dominio.Activo;
-import ClasesNegocio.FachadaNegocio;
-import InterfacesNegocio.INegocio;
+import clases.dominio.Activo;
+import negocio.FachadaNegocio;
+import interfaces.INegocio;
 import java.awt.Color;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,15 +18,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Rodrigo Gtz
  */
-public class FrmConsultarEstado extends javax.swing.JFrame {
+public class FrmModificarActivo extends javax.swing.JFrame {
 
     INegocio negocio;
-    
-    public FrmConsultarEstado() {
-       
+
+    public FrmModificarActivo() {
+
         initComponents();
         this.setLocationRelativeTo(null);
-        this.negocio = new FachadaNegocio();    
+        this.negocio = new FachadaNegocio();
     }
 
     /**
@@ -44,7 +45,8 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaActivos = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
-        btnVolver1 = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnVolver2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -74,14 +76,14 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
-        jLabel1.setText("Estados del activo");
+        jLabel1.setText("Modificar  activo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
+                .addContainerGap(194, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(96, 96, 96))
         );
@@ -93,41 +95,68 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
                 .addContainerGap(30, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 510, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 600, -1));
 
         tablaActivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nombre", "Estado"
+                "ID", "Nombre", "Tipo", "Estado", "Numero de Serie", "Fecha de Adquisicion"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tablaActivos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 460, 100));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 550, 160));
 
         txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
         jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
 
-        btnVolver1.setBackground(new java.awt.Color(0, 153, 204));
-        btnVolver1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver1.setText("Volver");
-        btnVolver1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditar.setBackground(new java.awt.Color(0, 153, 204));
+        btnEditar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolver1MouseEntered(evt);
+                btnEditarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolver1MouseExited(evt);
+                btnEditarMouseExited(evt);
             }
         });
-        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver1ActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 110, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 110, -1));
+
+        btnVolver2.setBackground(new java.awt.Color(0, 153, 204));
+        btnVolver2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnVolver2.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver2.setText("Volver");
+        btnVolver2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolver2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolver2MouseExited(evt);
+            }
+        });
+        btnVolver2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -137,7 +166,7 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
         );
 
         pack();
@@ -155,19 +184,31 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         buscarActivos();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1MouseEntered
+    }//GEN-LAST:event_btnEditarMouseEntered
 
-    private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1MouseExited
+    }//GEN-LAST:event_btnEditarMouseExited
 
-    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+       editarActivo();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnVolver2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver2MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolver2MouseEntered
+
+    private void btnVolver2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver2MouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolver2MouseExited
+
+    private void btnVolver2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver2ActionPerformed
         FrmMenu frmMenu = new FrmMenu();
         dispose();
-        frmMenu.setVisible(true);      
-    }//GEN-LAST:event_btnVolver1ActionPerformed
+        frmMenu.setVisible(true);
+    }//GEN-LAST:event_btnVolver2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,21 +227,23 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmModificarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmConsultarEstado().setVisible(true);
+                new FrmModificarActivo().setVisible(true);
             }
         });
     }
@@ -219,7 +262,7 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
             try {
                 Thread.sleep(500);
             } catch (InterruptedException ex) {
-                Logger.getLogger(FrmConsultarEstado.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(FrmModificarActivo.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             SwingUtilities.invokeLater(() -> {
@@ -229,6 +272,52 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         }).start();
     }
 
+    
+
+    private void editarActivo() {
+    // Obtener el índice de la fila seleccionada
+    int filaSeleccionada = tablaActivos.getSelectedRow();
+
+    if (filaSeleccionada != -1) { // Si hay una fila seleccionada
+        // Obtener los valores de la fila seleccionada
+        Long id =  (Long) tablaActivos.getValueAt(filaSeleccionada,0);
+        String nombre = (String) tablaActivos.getValueAt(filaSeleccionada, 1);
+        String tipo = (String) tablaActivos.getValueAt(filaSeleccionada, 2);
+        String estado = (String) tablaActivos.getValueAt(filaSeleccionada, 3);
+        String numSerie = (String) tablaActivos.getValueAt(filaSeleccionada, 4);
+        String fechaAdquisicionStr = (String) tablaActivos.getValueAt(filaSeleccionada, 5);
+
+        // Formatear la fecha
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        Date fechaAdquisicion = null;
+
+        try {
+            fechaAdquisicion = formatoFecha.parse(fechaAdquisicionStr);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al convertir la fecha: " + e.getMessage());
+            return;
+        }
+
+        // Crear el objeto Activo
+        Activo activo = new Activo();
+        activo.setId(id);
+        activo.setNombre(nombre);
+        activo.setTipo(tipo);
+        activo.setEstado(estado);
+        activo.setNumSerie(numSerie);
+        activo.setFechaAdquisicion(fechaAdquisicion);
+
+        // Abrir el formulario para editar el activo
+        FrmEditarActivo frmMenu = new FrmEditarActivo(activo);
+        dispose();
+        frmMenu.setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, selecciona un activo para editar.");
+    }
+}
+
+    
+
     private void rellenarTablaActivos(JTable jt, String busqueda) {
         DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
         modelo.setRowCount(0);
@@ -236,11 +325,18 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         List<Activo> listaActivos = this.negocio.consultarEstado(busqueda);
 
         if (listaActivos != null && !listaActivos.isEmpty()) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato de fecha deseado
             for (Activo listaActivo : listaActivos) {
+                Long id = listaActivo.getId();
                 String nombre = listaActivo.getNombre();
+                String tipo = listaActivo.getTipo();
                 String estado = listaActivo.getEstado();
-                           
-                modelo.addRow(new Object[]{nombre, estado});
+                String numSerie = listaActivo.getNumSerie();
+
+                Date fechaAdquisicion = listaActivo.getFechaAdquisicion();
+                String fechaFormateada = (fechaAdquisicion != null) ? dateFormat.format(fechaAdquisicion) : "Sin fecha";
+
+                modelo.addRow(new Object[]{id,nombre, tipo, estado, numSerie, fechaFormateada});
             }
         } else {
             JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
@@ -248,10 +344,11 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
 
         jt.setModel(modelo);
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnVolver1;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnVolver2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

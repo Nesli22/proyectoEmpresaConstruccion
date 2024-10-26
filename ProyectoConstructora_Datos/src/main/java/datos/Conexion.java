@@ -1,7 +1,7 @@
 
-package ClasesDatos;
+package datos;
 
-import InterfacesDatos.IConexion;
+import interfaces.IConexion;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

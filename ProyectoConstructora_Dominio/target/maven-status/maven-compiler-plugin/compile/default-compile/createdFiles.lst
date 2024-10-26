@@ -1,6 +1,6 @@
-Dominio\Activo.class
-Dominio\Persona.class
-Dominio\Mantenimiento_.class
-Dominio\Mantenimiento.class
-Dominio\Persona_.class
-Dominio\Activo_.class
+clases\dominio\Mantenimiento_.class
+clases\dominio\Persona_.class
+clases\dominio\Activo.class
+clases\dominio\Persona.class
+clases\dominio\Activo_.class
+clases\dominio\Mantenimiento.class

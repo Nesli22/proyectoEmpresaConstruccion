@@ -2,41 +2,40 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ClasesNegocio;
+package datos;
 
-import InterfacesNegocio.INegocio;
-import Dominio.Activo;
-import Dominio.Persona;
+import interfaces.IDatos;
+import clases.dominio.Activo;
+import clases.dominio.Persona;
 import java.util.List;
 
 /**
  *
  * @author IVAN
  */
-public class FachadaNegocio implements INegocio {
+public class FachadaDatos implements IDatos{
 
-    private ControlActivo activ = new ControlActivo();
-    private ControlPersona persona = new ControlPersona();
+    private PersonaDAO persona = new PersonaDAO();
+    private ActivoDAO activ = new ActivoDAO();
     
     @Override
     public Boolean registrarActivo(Activo activo) {
-      return activ.registarActivo(activo);
+       return activ.registrarActivo(activo);
     }
 
     @Override
     public List<Persona> recuperarPersonas() {
-       return persona.recuperarPersonas();
+       return persona.obtenerPersonas();
     }
 
     @Override
     public List<Activo> consultarEstado(String criterio) {
-       return this.activ.consultarEstado(criterio);
+        return activ.consultarEstado(criterio);
     }
 
     @Override
-    public Boolean editarActivo(Activo activo) {
-       return activ.editarActivo(activo);
+    public Boolean modificarActivo(Activo Activo) {
+        return activ.modificarActivo(Activo);
     }
-
     
 }
