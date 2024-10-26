@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyectoconstructora_negocio;
+package ClasesNegocio;
 import Dominio.Activo;
-import com.mycompany.proyectoconstructora_datos.FachadaDatos;
-import com.mycompany.proyectoconstructora_datos.IDatos;
+import ClasesDatos.FachadaDatos;
+import InterfacesDatos.IDatos;
 import java.util.List;
 
 
@@ -27,5 +27,9 @@ public class ControlActivo {
     
     public List<Activo> consultarEstado(String criterio){
         return datos.consultarEstado(criterio);
+    }
+    
+    public Boolean editarActivo(Activo activo){
+        return datos.modificarActivo(activo);
     }
 }

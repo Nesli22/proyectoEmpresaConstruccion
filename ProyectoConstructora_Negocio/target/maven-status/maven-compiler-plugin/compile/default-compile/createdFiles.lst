@@ -1,4 +1,4 @@
-com\mycompany\proyectoconstructora_negocio\ControlPersona.class
-com\mycompany\proyectoconstructora_negocio\INegocio.class
-com\mycompany\proyectoconstructora_negocio\ControlActivo.class
-com\mycompany\proyectoconstructora_negocio\FachadaNegocio.class
+ClasesNegocio\ControlPersona.class
+ClasesNegocio\ControlActivo.class
+InterfacesNegocio\INegocio.class
+ClasesNegocio\FachadaNegocio.class

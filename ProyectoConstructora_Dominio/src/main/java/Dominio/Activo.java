@@ -4,7 +4,6 @@
  */
 package Dominio;
 
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -42,29 +41,69 @@ public class Activo {
     @OneToMany(mappedBy = "activo", cascade = CascadeType.ALL)
     private List<Mantenimiento> mantenimientos;
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getNumSerie() { return numSerie; }
-    public void setNumSerie(String numSerie) { this.numSerie = numSerie; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getCosto() { return costo; }
-    public void setCosto(String costo) { this.costo = costo; }
+    public String getTipo() {
+        return tipo;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    public Persona getResponsable() { return responsable; }
-    public void setResponsable(Persona responsable) { this.responsable = responsable; }
+    public String getNumSerie() {
+        return numSerie;
+    }
 
-    public List<Mantenimiento> getMantenimientos() { return mantenimientos; }
-    public void setMantenimientos(List<Mantenimiento> mantenimientos) { this.mantenimientos = mantenimientos; }
+    public void setNumSerie(String numSerie) {
+        this.numSerie = numSerie;
+    }
+
+    public String getCosto() {
+        return costo;
+    }
+
+    public void setCosto(String costo) {
+        this.costo = costo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public Persona getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(Persona responsable) {
+        this.responsable = responsable;
+    }
+
+    public List<Mantenimiento> getMantenimientos() {
+        return mantenimientos;
+    }
+
+    public void setMantenimientos(List<Mantenimiento> mantenimientos) {
+        this.mantenimientos = mantenimientos;
+    }
 
     public Date getFechaAdquisicion() {
         return fechaAdquisicion;
@@ -73,8 +112,6 @@ public class Activo {
     public void setFechaAdquisicion(Date fechaAdquisicion) {
         this.fechaAdquisicion = fechaAdquisicion;
     }
-    
-    
 
     public Activo() {
     }
@@ -99,9 +136,13 @@ public class Activo {
         this.fechaAdquisicion = fechaAdquisicion;
     }
 
-  
-    
-    
-    
-    
+    public Activo(Long id, String nombre, String tipo, String estado, String numSerie, Date fechaAdquisicion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.estado = estado;
+        this.tipo = tipo;
+        this.numSerie = numSerie;
+        this.fechaAdquisicion = fechaAdquisicion;
+    }
+
 }

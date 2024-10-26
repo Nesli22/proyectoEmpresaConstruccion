@@ -1,9 +1,13 @@
-
-package com.mycompany.proyectoconstructora_presentacion;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package ClasesPresentacion;
 
 import Dominio.Activo;
-import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
-import com.mycompany.proyectoconstructora_negocio.INegocio;
+import Dominio.Persona;
+import ClasesNegocio.FachadaNegocio;
+import InterfacesNegocio.INegocio;
 import java.awt.Color;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,15 +21,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Rodrigo Gtz
  */
-public class FrmConsultarEstado extends javax.swing.JFrame {
+public class FrmConsultarAsignado extends javax.swing.JFrame {
 
     INegocio negocio;
     
-    public FrmConsultarEstado() {
-       
+    public FrmConsultarAsignado() {
         initComponents();
         this.setLocationRelativeTo(null);
-        this.negocio = new FachadaNegocio();    
+        this.negocio = new FachadaNegocio();
     }
 
     /**
@@ -38,18 +41,77 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        btnBuscar = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaActivos = new javax.swing.JTable();
         txtBuscar = new javax.swing.JTextField();
-        btnVolver1 = new javax.swing.JButton();
+        btnBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnVolver.setBackground(new java.awt.Color(0, 153, 204));
+        btnVolver.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnVolver.setForeground(new java.awt.Color(255, 255, 255));
+        btnVolver.setText("Volver");
+        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolverMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolverMouseExited(evt);
+            }
+        });
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 110, -1));
+
+        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
+        jPanel2.setForeground(new java.awt.Color(0, 153, 255));
+
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel1.setText("Activo asignado");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(jLabel1)
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 510, -1));
+
+        tablaActivos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Activo", "Asignado a:"
+            }
+        ));
+        jScrollPane1.setViewportView(tablaActivos);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 460, 140));
+
+        txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
 
         btnBuscar.setBackground(new java.awt.Color(0, 153, 204));
         btnBuscar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -70,65 +132,6 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         });
         jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 30));
 
-        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 153, 255));
-
-        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
-        jLabel1.setText("Estados del activo");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(100, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(96, 96, 96))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 510, -1));
-
-        tablaActivos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Nombre", "Estado"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaActivos);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 460, 100));
-
-        txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
-
-        btnVolver1.setBackground(new java.awt.Color(0, 153, 204));
-        btnVolver1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnVolver1.setForeground(new java.awt.Color(255, 255, 255));
-        btnVolver1.setText("Volver");
-        btnVolver1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolver1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolver1MouseExited(evt);
-            }
-        });
-        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolver1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnVolver1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 110, -1));
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -137,11 +140,25 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered
+        btnVolver.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnVolverMouseEntered
+
+    private void btnVolverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseExited
+        btnVolver.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnVolverMouseExited
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        FrmMenu frmMenu = new FrmMenu();
+        dispose();
+        frmMenu.setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
         btnBuscar.setBackground(new Color(0, 156, 223));
@@ -152,22 +169,8 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarMouseExited
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscarActivos();
+        buscarActivo();
     }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnVolver1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1MouseEntered
-
-    private void btnVolver1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolver1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVolver1MouseExited
-
-    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
-        FrmMenu frmMenu = new FrmMenu();
-        dispose();
-        frmMenu.setVisible(true);      
-    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,13 +189,13 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmConsultarEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmConsultarAsignado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -200,12 +203,12 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmConsultarEstado().setVisible(true);
+                new FrmConsultarAsignado().setVisible(true);
             }
         });
     }
-
-    private void buscarActivos() {
+    
+    private void buscarActivo() {
         String criterio = txtBuscar.getText().trim();
 
         if (criterio.isEmpty()) {
@@ -223,24 +226,37 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
             }
 
             SwingUtilities.invokeLater(() -> {
-                rellenarTablaActivos(tablaActivos, criterio);
+                rellenarTabla(tablaActivos, criterio);
                 txtBuscar.setText("");
             });
         }).start();
     }
 
-    private void rellenarTablaActivos(JTable jt, String busqueda) {
+    private void rellenarTabla(JTable jt, String criterio) {
         DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+
         modelo.setRowCount(0);
 
-        List<Activo> listaActivos = this.negocio.consultarEstado(busqueda);
+        List<Activo> listaActivo = this.negocio.consultarEstado(criterio);
+        List<Persona> listaPersona = this.negocio.recuperarPersonas();
 
-        if (listaActivos != null && !listaActivos.isEmpty()) {
-            for (Activo listaActivo : listaActivos) {
-                String nombre = listaActivo.getNombre();
-                String estado = listaActivo.getEstado();
-                           
-                modelo.addRow(new Object[]{nombre, estado});
+        if (listaActivo != null && !listaActivo.isEmpty()) {
+            for (Activo activo : listaActivo) {
+                String nombreActivo = activo.getNombre();
+                String nombrePersonaAsignada = "";
+
+                if (activo.getResponsable() != null) {
+                    for (Persona persona : listaPersona) {
+                        if (persona.getId().equals(activo.getResponsable().getId())) {
+                            nombrePersonaAsignada = persona.getNombre();
+                            break;
+                        }
+                    }
+                } else {
+                    nombrePersonaAsignada = "Sin responsable";
+                }
+
+                modelo.addRow(new Object[]{nombreActivo, nombrePersonaAsignada});
             }
         } else {
             JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
@@ -248,10 +264,10 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
 
         jt.setModel(modelo);
     }
- 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnVolver1;
+    private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -259,4 +275,7 @@ public class FrmConsultarEstado extends javax.swing.JFrame {
     private javax.swing.JTable tablaActivos;
     private javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
+
+   
+    
 }

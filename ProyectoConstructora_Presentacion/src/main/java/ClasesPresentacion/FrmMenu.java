@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.proyectoconstructora_presentacion;
+package ClasesPresentacion;
 
 import java.awt.Color;
 
@@ -88,7 +88,6 @@ public class FrmMenu extends javax.swing.JFrame {
         btnModificarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnModificarActivo.setForeground(new java.awt.Color(255, 255, 255));
         btnModificarActivo.setText("Modificar Activo");
-        btnModificarActivo.setEnabled(false);
         btnModificarActivo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnModificarActivoMouseEntered(evt);
@@ -171,7 +170,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActivoMouseExited
 
     private void btnConsultarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActivoActionPerformed
-        FrmVerificarAsignado frmVerificarAsignado = new FrmVerificarAsignado();
+        FrmConsultarAsignado frmVerificarAsignado = new FrmConsultarAsignado();
         dispose();
         frmVerificarAsignado.setVisible(true);
     }//GEN-LAST:event_btnConsultarActivoActionPerformed
@@ -185,8 +184,9 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnModificarActivoMouseExited
 
     private void btnModificarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActivoActionPerformed
-
-        this.dispose();
+       FrmModificarActivo frmModificarActivo = new FrmModificarActivo();
+       dispose();
+       frmModificarActivo.setVisible(true);
     }//GEN-LAST:event_btnModificarActivoActionPerformed
 
     private void btnConsultarActivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActivo1ActionPerformed

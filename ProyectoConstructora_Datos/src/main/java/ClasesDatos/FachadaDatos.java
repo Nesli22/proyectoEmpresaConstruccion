@@ -2,8 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyectoconstructora_datos;
+package ClasesDatos;
 
+import InterfacesDatos.IDatos;
 import Dominio.Activo;
 import Dominio.Persona;
 import java.util.List;
@@ -30,6 +31,11 @@ public class FachadaDatos implements IDatos{
     @Override
     public List<Activo> consultarEstado(String criterio) {
         return activ.consultarEstado(criterio);
+    }
+
+    @Override
+    public Boolean modificarActivo(Activo Activo) {
+        return activ.modificarActivo(Activo);
     }
     
 }
