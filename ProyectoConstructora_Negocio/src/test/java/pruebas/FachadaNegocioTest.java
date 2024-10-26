@@ -1,9 +1,9 @@
 package pruebas;
 
+import ClasesNegocio.FachadaNegocio;
 import Dominio.Activo;
 import Dominio.Persona;
-import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
-import com.interfaces.proyectoconstructora_negocio.INegocio;
+import InterfacesNegocio.INegocio;
 import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -23,8 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Esta clase contiene métodos de prueba para registrar, recuperar, consultar y
  * editar activos y personas en el sistema. Se utiliza JUnit para llevar a cabo
  * las pruebas.
- * 
- * Author: Rodrigo Gtz 
+ *
+ * Author: Rodrigo Gtz
  */
 class FachadaNegocioTest {
 
@@ -82,7 +82,7 @@ class FachadaNegocioTest {
         assertFalse(resultado.isEmpty(), "La lista de activos no debería estar vacía");
         boolean exito = resultado.stream().anyMatch(activo -> activo instanceof Activo);
         assertTrue(exito, "Se deben obtener activos correctamente de la base de datos");
-        assertEquals("Operativo", resultado.getLast().getEstado());
+          assertEquals("Operativo", resultado.get(resultado.size() - 1).getEstado());
     }
 
     /**

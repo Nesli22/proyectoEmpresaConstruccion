@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package com.mycompany.proyectoconstructora_presentacion;
+package ClasesPresentacion;
 
 import Dominio.Activo;
-import com.mycompany.proyectoconstructora_negocio.FachadaNegocio;
-import com.interfaces.proyectoconstructora_negocio.INegocio;
+import ClasesNegocio.FachadaNegocio;
+import InterfacesNegocio.INegocio;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;

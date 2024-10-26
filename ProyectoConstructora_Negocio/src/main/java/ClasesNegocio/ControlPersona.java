@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.mycompany.proyectoconstructora_negocio;
+package ClasesNegocio;
 
 import Dominio.Persona;
-import com.mycompany.proyectoconstructora_datos.FachadaDatos;
-import com.interfaces.proyectoconstructora_datos.IDatos;
+import ClasesDatos.FachadaDatos;
+import InterfacesDatos.IDatos;
 import java.util.List;
 
 /**
