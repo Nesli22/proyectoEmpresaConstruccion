@@ -1,9 +1,9 @@
 package pruebas;
 
-import ClasesNegocio.FachadaNegocio;
-import Dominio.Activo;
-import Dominio.Persona;
-import InterfacesNegocio.INegocio;
+import negocio.FachadaNegocio;
+import clases.dominio.Activo;
+import clases.dominio.Persona;
+import interfaces.INegocio;
 import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

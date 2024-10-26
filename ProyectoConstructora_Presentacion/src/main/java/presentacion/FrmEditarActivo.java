@@ -2,11 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package ClasesPresentacion;
+package presentacion;
 
-import Dominio.Activo;
-import ClasesNegocio.FachadaNegocio;
-import InterfacesNegocio.INegocio;
+import clases.dominio.Activo;
+import negocio.FachadaNegocio;
+import interfaces.INegocio;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -18,37 +18,52 @@ import javax.swing.JOptionPane;
  *
  * @author IVAN
  */
-public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
+public class FrmEditarActivo extends javax.swing.JFrame {
 
     INegocio negocio;
 
-    public FrmRegistrarActivoBasico() {
+    public FrmEditarActivo(Activo activo) {
         negocio = new FachadaNegocio();
         initComponents();
+
+        // Asignar valores del objeto activo a los campos del formulario
+        fldId.setText(String.valueOf(activo.getId()));
+        txtNombre.setText(activo.getNombre());  // Asignar el nombre
+        cmbTipo.setSelectedItem(activo.getTipo());  // Seleccionar el tipo en el combo
+        cmbEstado.setSelectedItem(activo.getEstado());// Asignar el estado
+        txtNumeroSerie.setText(activo.getNumSerie());  // Asignar el número de serie
+
+        // Convertir la fecha de adquisición a Date y asignarla al JDateChooser
+        Date fechaAdquisicion = activo.getFechaAdquisicion();
+        date.setDate(fechaAdquisicion);
     }
 
-    public void agregarActivo() {
+    private FrmEditarActivo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void editarActivo() {
         // Llamamos al método de validación
         if (!validarCampos()) {
             return;  // Si alguna validación falla, se detiene el proceso.
         }
 
         // Obtener valores de los campos
+        Long id = Long.parseLong(fldId.getText());
         String nombre = txtNombre.getText().trim();
         String tipo = (String) cmbTipo.getSelectedItem();
+        String estado = (String) cmbEstado.getSelectedItem();
         String numeroSerie = txtNumeroSerie.getText().trim();
         Date fechaSeleccionada = date.getDate();
 
-        // Generar un ID aleatorio (long corto)
-        long id = generarIdAleatorio();
-
         // Crear el objeto Activo
-        Activo activo = new Activo(id, nombre, tipo, numeroSerie, fechaSeleccionada);
+        Activo activo = new Activo(id, nombre, tipo, estado, numeroSerie, fechaSeleccionada);
+        negocio.editarActivo(activo);
         // Registrar el activo utilizando el método de negocio
-        if (negocio.registrarActivo(activo)) {
-            JOptionPane.showMessageDialog(null, "Activo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        if (negocio.editarActivo(activo)) {
+            JOptionPane.showMessageDialog(null, "Activo editado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Error al registrar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error al editar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -65,7 +80,7 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
             return false;
         }
 
-        if (!nombre.matches("[a-zA-Z\\s]+")) {
+        if (!nombre.trim().matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+")) {
             JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
@@ -107,15 +122,18 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
         btnVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        fldId = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cmbTipo = new javax.swing.JComboBox<>();
+        cmbEstado = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        txtNumeroSerie = new javax.swing.JTextField();
         date = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        btnGuardar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        txtNumeroSerie = new javax.swing.JTextField();
+        cmbTipo = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -143,73 +161,95 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 240, -1));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 240, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
-        jLabel1.setText("Registrar activo básico");
+        jLabel1.setText("Editar activo ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(282, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(263, 263, 263))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap())
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, -1));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Nombre:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 260, -1));
+        fldId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        fldId.setText("0");
+        jPanel1.add(fldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 260, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Tipo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maquinaria", "Herramienta" }));
-        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 260, -1));
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operativa", "Mantenimiento", "No Operativa" }));
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Fecha de adquisición:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 320, -1, -1));
-        jPanel1.add(txtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 260, -1));
-        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 260, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 340, -1, -1));
+        jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Número serie:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
+        jLabel6.setText("Estado:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
-        btnGuardar.setBackground(new java.awt.Color(0, 153, 204));
-        btnGuardar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnGuardar.setForeground(new java.awt.Color(255, 255, 255));
-        btnGuardar.setText("Guardar");
-        btnGuardar.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnEditar.setBackground(new java.awt.Color(0, 153, 204));
+        btnEditar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setText("Editar");
+        btnEditar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseEntered(evt);
+                btnEditarMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnGuardarMouseExited(evt);
+                btnEditarMouseExited(evt);
             }
         });
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
+                btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 240, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 240, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Número serie:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
+
+        txtNumeroSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroSerieActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 260, -1));
+
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maquinaria", "Herramienta" }));
+        cmbTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbTipoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 260, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("ID:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -219,7 +259,7 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,26 +275,40 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMouseExited
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-  FrmMenuControlarRegistro frmRegistrarActivos = new FrmMenuControlarRegistro();
+        FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
 
-        frmRegistrarActivos.setVisible(true);
+        frmModificarActvio.setVisible(true);
 
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnGuardarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseEntered
+    private void btnEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseEntered
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarMouseEntered
+    }//GEN-LAST:event_btnEditarMouseEntered
 
-    private void btnGuardarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGuardarMouseExited
+    private void btnEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarMouseExited
+    }//GEN-LAST:event_btnEditarMouseExited
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-      agregarActivo();
-     
-      
-    }//GEN-LAST:event_btnGuardarActionPerformed
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        editarActivo();
+        
+         FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
+
+        frmModificarActvio.setVisible(true);
+
+        dispose();
+
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void txtNumeroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSerieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroSerieActionPerformed
+
+    private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbTipoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,36 +327,41 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmEditarActivo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmRegistrarActivoBasico().setVisible(true);
+                new FrmEditarActivo().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbEstado;
     private javax.swing.JComboBox<String> cmbTipo;
     private com.toedter.calendar.JDateChooser date;
+    private javax.swing.JLabel fldId;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtNombre;
