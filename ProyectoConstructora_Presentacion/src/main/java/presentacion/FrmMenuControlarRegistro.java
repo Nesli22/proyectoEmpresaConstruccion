@@ -4,7 +4,11 @@
  */
 package presentacion;
 
+import clases.dominio.Persona;
+import interfaces.INegocio;
 import java.awt.Color;
+import java.util.List;
+import negocio.FachadaNegocio;
 
 /**
  *
@@ -12,10 +16,9 @@ import java.awt.Color;
  */
 public class FrmMenuControlarRegistro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmRegistarActivoBasico
-     */
+     INegocio negocio;
     public FrmMenuControlarRegistro() {
+        negocio = new FachadaNegocio();
         initComponents();
     }
 
@@ -31,7 +34,7 @@ public class FrmMenuControlarRegistro extends javax.swing.JFrame {
         btnRegistrarActivoBasico1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
-        btnModificarActivo = new javax.swing.JButton();
+        btnRegistrarActivoConDetalles = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnRegistrarActivoBasico2 = new javax.swing.JButton();
@@ -80,25 +83,24 @@ public class FrmMenuControlarRegistro extends javax.swing.JFrame {
         });
         jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 260, 110, -1));
 
-        btnModificarActivo.setBackground(new java.awt.Color(0, 153, 204));
-        btnModificarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
-        btnModificarActivo.setForeground(new java.awt.Color(255, 255, 255));
-        btnModificarActivo.setText("Registar Activo con Detalles ");
-        btnModificarActivo.setEnabled(false);
-        btnModificarActivo.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnRegistrarActivoConDetalles.setBackground(new java.awt.Color(0, 153, 204));
+        btnRegistrarActivoConDetalles.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
+        btnRegistrarActivoConDetalles.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarActivoConDetalles.setText("Registar Activo con Detalles ");
+        btnRegistrarActivoConDetalles.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnModificarActivoMouseEntered(evt);
+                btnRegistrarActivoConDetallesMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnModificarActivoMouseExited(evt);
+                btnRegistrarActivoConDetallesMouseExited(evt);
             }
         });
-        btnModificarActivo.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarActivoConDetalles.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnModificarActivoActionPerformed(evt);
+                btnRegistrarActivoConDetallesActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 240, -1));
+        jPanel1.add(btnRegistrarActivoConDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 240, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -187,25 +189,28 @@ public class FrmMenuControlarRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMouseExited
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-       FrmMenu frmMenu = new FrmMenu();
+        FrmMenu frmMenu = new FrmMenu();
 
         frmMenu.setVisible(true);
 
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
-    private void btnModificarActivoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarActivoMouseEntered
-        btnModificarActivo.setBackground(new Color(0, 156, 223));
-    }//GEN-LAST:event_btnModificarActivoMouseEntered
+    private void btnRegistrarActivoConDetallesMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivoConDetallesMouseEntered
+        btnRegistrarActivoConDetalles.setBackground(new Color(0, 156, 223));
+    }//GEN-LAST:event_btnRegistrarActivoConDetallesMouseEntered
 
-    private void btnModificarActivoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnModificarActivoMouseExited
-        btnModificarActivo.setBackground(new Color(0, 134, 190));
-    }//GEN-LAST:event_btnModificarActivoMouseExited
+    private void btnRegistrarActivoConDetallesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivoConDetallesMouseExited
+        btnRegistrarActivoConDetalles.setBackground(new Color(0, 134, 190));
+    }//GEN-LAST:event_btnRegistrarActivoConDetallesMouseExited
 
-    private void btnModificarActivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActivoActionPerformed
-
+    private void btnRegistrarActivoConDetallesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActivoConDetallesActionPerformed
+       List<Persona> personas= negocio.recuperarPersonas();
+        FrmRegistarActivoDetalles frmR = new FrmRegistarActivoDetalles(personas);
+        frmR.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_btnModificarActivoActionPerformed
+
+    }//GEN-LAST:event_btnRegistrarActivoConDetallesActionPerformed
 
     private void btnRegistrarActivoBasico1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivoBasico1MouseEntered
         // TODO add your handling code here:
@@ -228,9 +233,9 @@ public class FrmMenuControlarRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarActivoBasico2MouseExited
 
     private void btnRegistrarActivoBasico2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActivoBasico2ActionPerformed
-     FrmRegistrarActivoBasico frmM= new FrmRegistrarActivoBasico();
-     frmM.setVisible(true);
-     this.dispose();
+        FrmRegistrarActivoBasico frmM = new FrmRegistrarActivoBasico();
+        frmM.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarActivoBasico2ActionPerformed
 
     private void btnRegistrarActivoBasico3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivoBasico3MouseEntered
@@ -284,10 +289,10 @@ public class FrmMenuControlarRegistro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnModificarActivo;
     private javax.swing.JButton btnRegistrarActivoBasico1;
     private javax.swing.JButton btnRegistrarActivoBasico2;
     private javax.swing.JButton btnRegistrarActivoBasico3;
+    private javax.swing.JButton btnRegistrarActivoConDetalles;
     private javax.swing.JButton btnVolver;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

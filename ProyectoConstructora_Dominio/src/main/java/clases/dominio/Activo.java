@@ -33,6 +33,7 @@ public class Activo {
     private String costo;
     private String estado;
     private Date fechaAdquisicion;
+    private String ubicacion;
 
     @ManyToOne
     @JoinColumn(name = "persona_id")
@@ -116,7 +117,7 @@ public class Activo {
     public Activo() {
     }
 
-    public Activo(Long id, String nombre, String tipo, String numSerie, String costo, String estado, Date fechaAdquisicion, Persona responsable, List<Mantenimiento> mantenimientos) {
+    public Activo(Long id, String nombre, String tipo, String numSerie, String costo, String estado, Date fechaAdquisicion, Persona responsable) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
@@ -125,7 +126,7 @@ public class Activo {
         this.estado = estado;
         this.fechaAdquisicion = fechaAdquisicion;
         this.responsable = responsable;
-        this.mantenimientos = mantenimientos;
+        this.mantenimientos = new ArrayList<>();
     }
 
     public Activo(Long id, String nombre, String tipo, String numSerie, Date fechaAdquisicion) {
@@ -145,4 +146,24 @@ public class Activo {
         this.fechaAdquisicion = fechaAdquisicion;
     }
 
+    public Activo(Long id, String nombre, String tipo, String numSerie, String costo, String estado, Date fechaAdquisicion, String ubicacion, Persona responsable) {
+        this.id = id;
+        this.nombre = nombre;
+        this.tipo = tipo;
+        this.numSerie = numSerie;
+        this.costo = costo;
+        this.estado = estado;
+        this.fechaAdquisicion = fechaAdquisicion;
+        this.ubicacion = ubicacion;
+        this.responsable = responsable;
+        this.mantenimientos = new ArrayList<>();
+    }
+
+    @Override
+    public String toString() {
+        return "Activo{" + "nombre=" + nombre + '}';
+    }
+
+    
+    
 }

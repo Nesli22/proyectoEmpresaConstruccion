@@ -100,12 +100,7 @@ class FachadaNegocioTest {
         assertTrue(exito, "La edición del activo debería ser exitosa");
     }
 
-    /**
-     * Método auxiliar para crear un activo de prueba.
-     *
-     * @return Un nuevo objeto Activo con valores predefinidos.
-     */
-    private Activo crearActivoPrueba() {
+  private Activo crearActivoPrueba() {
         return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
     }
 }
