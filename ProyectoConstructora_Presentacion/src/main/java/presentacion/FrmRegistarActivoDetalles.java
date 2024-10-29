@@ -88,6 +88,19 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return false;
         }
+
+        // Verificación adicional para asegurar que el campo de costo sea numérico
+        try {
+            double costo = Double.parseDouble(txtCosto.getText().trim());
+            if (costo < 0) {
+                JOptionPane.showMessageDialog(null, "El costo no puede ser un valor negativo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido para el costo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
         return true;
     }
 
