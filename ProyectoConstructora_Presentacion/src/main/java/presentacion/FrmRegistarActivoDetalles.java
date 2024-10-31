@@ -241,6 +241,11 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
         cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operativa", "Mantenimiento", "No Operativa" }));
         jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 260, -1));
 
+        cmbPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPersonasActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmbPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -292,6 +297,10 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void cmbPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPersonasActionPerformed
 
     /**
      * @param args the command line arguments

@@ -117,6 +117,16 @@ public class Activo {
     public Activo() {
     }
 
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    
+    
+
     public Activo(Long id, String nombre, String tipo, String numSerie, String costo, String estado, Date fechaAdquisicion, Persona responsable) {
         this.id = id;
         this.nombre = nombre;

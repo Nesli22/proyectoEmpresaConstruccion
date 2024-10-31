@@ -5,12 +5,14 @@
 package presentacion;
 
 import clases.dominio.Activo;
+import clases.dominio.Persona;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
@@ -21,8 +23,10 @@ import javax.swing.JOptionPane;
 public class FrmEditarActivo extends javax.swing.JFrame {
 
     INegocio negocio;
+    private List<Persona> listaPersonas;
 
-    public FrmEditarActivo(Activo activo) {
+
+    public FrmEditarActivo(Activo activo,List<Persona> personas) {
         negocio = new FachadaNegocio();
         initComponents();
 
@@ -32,12 +36,29 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         cmbTipo.setSelectedItem(activo.getTipo());  // Seleccionar el tipo en el combo
         cmbEstado.setSelectedItem(activo.getEstado());// Asignar el estado
         txtNumeroSerie.setText(activo.getNumSerie());  // Asignar el número de serie
+        cmbPersonas.setSelectedItem(activo.getResponsable());
+        txtUbicacion.setText(activo.getUbicacion());
+        txtCosto.setText(activo.getCosto());
 
         // Convertir la fecha de adquisición a Date y asignarla al JDateChooser
         Date fechaAdquisicion = activo.getFechaAdquisicion();
         date.setDate(fechaAdquisicion);
+        
+        this.listaPersonas = personas;
+        llenarCombo(listaPersonas);
     }
+    
+    public void llenarCombo(List<Persona> listaPersonas) {
 
+        cmbPersonas.removeAllItems();
+
+        for (Persona persona : listaPersonas) {
+            cmbPersonas.addItem(persona);
+        }
+    }
+    
+
+    
     private FrmEditarActivo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -55,9 +76,12 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         String estado = (String) cmbEstado.getSelectedItem();
         String numeroSerie = txtNumeroSerie.getText().trim();
         Date fechaSeleccionada = date.getDate();
+        Persona persona  = (Persona) cmbPersonas.getSelectedItem();
+        String ubicacion = txtUbicacion.getText().trim();
+        String costo = txtCosto.getText().trim();
 
         // Crear el objeto Activo
-        Activo activo = new Activo(id, nombre, tipo, estado, numeroSerie, fechaSeleccionada);
+        Activo activo = new Activo(id, nombre, tipo, numeroSerie, costo, estado, fechaSeleccionada, ubicacion, persona);
         negocio.editarActivo(activo);
         // Registrar el activo utilizando el método de negocio
         if (negocio.editarActivo(activo)) {
@@ -68,36 +92,20 @@ public class FrmEditarActivo extends javax.swing.JFrame {
     }
 
 // Método para validar los campos
-    private boolean validarCampos() {
-        String nombre = txtNombre.getText().trim();
-        String tipo = (String) cmbTipo.getSelectedItem();
-        String numeroSerie = txtNumeroSerie.getText().trim();
-        Date fechaSeleccionada = date.getDate();
+     private boolean validarCampos() {
+        if (txtNombre.getText().trim().isEmpty()
+                || cmbTipo.getSelectedItem() == null
+                || txtNumeroSerie.getText().trim().isEmpty()
+                || date.getDate() == null
+                || cmbPersonas.getSelectedItem() == null
+                || cmbEstado.getSelectedItem() == null
+                || txtUbicacion.getText().trim().isEmpty()
+                || txtCosto.getText().trim().isEmpty()) {
 
-        // Validaciones
-        if (nombre.isEmpty() || tipo == null || numeroSerie.isEmpty() || fechaSeleccionada == null) {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return false;
         }
-
-        if (!nombre.trim().matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+")) {
-            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        if (!numeroSerie.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "El número de serie solo puede contener números.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate fechaIngresada = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        if (fechaIngresada.isAfter(fechaActual)) {
-            JOptionPane.showMessageDialog(null, "La fecha no puede ser mayor a la fecha actual.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;  // Si todas las validaciones pasan, retornamos true.
+        return true;
     }
 
 // Método para generar un ID aleatorio tipo long
@@ -125,15 +133,22 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         fldId = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        cmbEstado = new javax.swing.JComboBox<>();
+        cmbPersonas = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         date = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         btnEditar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
-        txtNumeroSerie = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
         cmbTipo = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        cmbEstado = new javax.swing.JComboBox<>();
+        jLabel10 = new javax.swing.JLabel();
+        txtNumeroSerie = new javax.swing.JTextField();
+        txtUbicacion = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -161,7 +176,7 @@ public class FrmEditarActivo extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 240, -1));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 560, 240, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -190,15 +205,14 @@ public class FrmEditarActivo extends javax.swing.JFrame {
 
         fldId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         fldId.setText("0");
-        jPanel1.add(fldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 100, -1, -1));
+        jPanel1.add(fldId, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 100, -1, -1));
         jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 140, 260, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel3.setText("Tipo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+        jLabel3.setText("Nombre:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, -1, -1));
 
-        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operativa", "Mantenimiento", "No Operativa" }));
-        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 260, -1));
+        jPanel1.add(cmbPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 390, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("Fecha de adquisición:");
@@ -206,8 +220,8 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 260, -1));
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel6.setText("Estado:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        jLabel6.setText("Costo:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
 
         btnEditar.setBackground(new java.awt.Color(0, 153, 204));
         btnEditar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -226,18 +240,18 @@ public class FrmEditarActivo extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 450, 240, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 560, 240, -1));
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Número serie:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, -1));
 
-        txtNumeroSerie.addActionListener(new java.awt.event.ActionListener() {
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroSerieActionPerformed(evt);
+                txtCostoActionPerformed(evt);
             }
         });
-        jPanel1.add(txtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 260, -1));
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 490, 260, -1));
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Maquinaria", "Herramienta" }));
         cmbTipo.addActionListener(new java.awt.event.ActionListener() {
@@ -249,7 +263,40 @@ public class FrmEditarActivo extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel8.setText("ID:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 100, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Tipo:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, -1, -1));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operativa", "Mantenimiento", "No Operativa" }));
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 240, 260, -1));
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel10.setText("Estado:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+
+        txtNumeroSerie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumeroSerieActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtNumeroSerie, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 260, -1));
+
+        txtUbicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUbicacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 260, -1));
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel11.setText("Responsable:");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 390, -1, -1));
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel12.setText("Ubicación:");
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 440, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -259,7 +306,9 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 597, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,13 +351,21 @@ public class FrmEditarActivo extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnEditarActionPerformed
 
-    private void txtNumeroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSerieActionPerformed
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroSerieActionPerformed
+    }//GEN-LAST:event_txtCostoActionPerformed
 
     private void cmbTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbTipoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbTipoActionPerformed
+
+    private void txtNumeroSerieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSerieActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumeroSerieActionPerformed
+
+    private void txtUbicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUbicacionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUbicacionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,20 +409,27 @@ public class FrmEditarActivo extends javax.swing.JFrame {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnVolver;
     private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JComboBox<Persona> cmbPersonas;
     private javax.swing.JComboBox<String> cmbTipo;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JLabel fldId;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumeroSerie;
+    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 }
