@@ -1,6 +1,7 @@
 package presentacion;
 
 import clases.dominio.Activo;
+import clases.dominio.Persona;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;
@@ -70,7 +71,7 @@ public class FrmModificarActivo extends javax.swing.JFrame {
                 btnBuscarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 140, 30));
+        jPanel1.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 110, 140, 30));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -83,30 +84,30 @@ public class FrmModificarActivo extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(194, Short.MAX_VALUE)
+                .addContainerGap(269, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(96, 96, 96))
+                .addGap(261, 261, 261))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel1)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 600, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 840, -1));
 
         tablaActivos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Tipo", "Estado", "Numero de Serie", "Fecha de Adquisicion"
+                "ID", "Nombre", "Tipo", "Estado", "Numero de Serie", "Fecha de Adquisicion", "Responsable", "Ubicación", "Costo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -115,10 +116,10 @@ public class FrmModificarActivo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablaActivos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 550, 160));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 800, 160));
 
         txtBuscar.setForeground(new java.awt.Color(102, 102, 102));
-        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 310, 30));
+        jPanel1.add(txtBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 310, 30));
 
         btnEditar.setBackground(new java.awt.Color(0, 153, 204));
         btnEditar.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -137,7 +138,7 @@ public class FrmModificarActivo extends javax.swing.JFrame {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 330, 110, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 340, 110, -1));
 
         btnVolver2.setBackground(new java.awt.Color(0, 153, 204));
         btnVolver2.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -162,7 +163,9 @@ public class FrmModificarActivo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 829, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,6 +289,9 @@ public class FrmModificarActivo extends javax.swing.JFrame {
         String estado = (String) tablaActivos.getValueAt(filaSeleccionada, 3);
         String numSerie = (String) tablaActivos.getValueAt(filaSeleccionada, 4);
         String fechaAdquisicionStr = (String) tablaActivos.getValueAt(filaSeleccionada, 5);
+        Persona persona = (Persona) tablaActivos.getValueAt(filaSeleccionada, 6);
+        String ubicacion = (String) tablaActivos.getValueAt(filaSeleccionada, 7);
+        String costo = (String) tablaActivos.getValueAt(filaSeleccionada, 8);
 
         // Formatear la fecha
         SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -306,9 +312,14 @@ public class FrmModificarActivo extends javax.swing.JFrame {
         activo.setEstado(estado);
         activo.setNumSerie(numSerie);
         activo.setFechaAdquisicion(fechaAdquisicion);
+        activo.setResponsable(persona);
+        activo.setUbicacion(ubicacion);
+        activo.setCosto(costo);
+        
 
         // Abrir el formulario para editar el activo
-        FrmEditarActivo frmMenu = new FrmEditarActivo(activo);
+        List<Persona> personas= negocio.recuperarPersonas();
+        FrmEditarActivo frmMenu = new FrmEditarActivo(activo,personas);
         dispose();
         frmMenu.setVisible(true);
     } else {
@@ -335,8 +346,12 @@ public class FrmModificarActivo extends javax.swing.JFrame {
 
                 Date fechaAdquisicion = listaActivo.getFechaAdquisicion();
                 String fechaFormateada = (fechaAdquisicion != null) ? dateFormat.format(fechaAdquisicion) : "Sin fecha";
+                
+                Persona persona = listaActivo.getResponsable();
+                String ubicacion = listaActivo.getUbicacion();
+                String costo = listaActivo.getCosto();
 
-                modelo.addRow(new Object[]{id,nombre, tipo, estado, numSerie, fechaFormateada});
+                modelo.addRow(new Object[]{id,nombre, tipo, estado, numSerie, fechaFormateada, persona, ubicacion,costo});
             }
         } else {
             JOptionPane.showMessageDialog(this, "No se encontraron activos con el criterio de búsqueda especificado.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
