@@ -90,6 +90,9 @@ public class ActivoDAO {
                 activoExistente.setNumSerie(activo.getNumSerie());
                 activoExistente.setEstado(activo.getEstado());
                 activoExistente.setFechaAdquisicion(activo.getFechaAdquisicion());
+                activoExistente.setResponsable(activo.getResponsable());
+                activoExistente.setUbicacion(activo.getUbicacion());
+                activoExistente.setCosto(activo.getCosto());
 
                 // Hacer el merge para que JPA reconozca los cambios
                 entityManager.merge(activoExistente);

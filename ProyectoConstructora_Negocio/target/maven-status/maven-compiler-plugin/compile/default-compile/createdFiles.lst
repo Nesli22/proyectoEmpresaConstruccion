@@ -1,4 +1,4 @@
-negocio\FachadaNegocio.class
-negocio\ControlPersona.class
-negocio\ControlActivo.class
-interfaces\INegocio.class
+negocio/FachadaNegocio.class
+negocio/ControlPersona.class
+interfaces/INegocio.class
+negocio/ControlActivo.class

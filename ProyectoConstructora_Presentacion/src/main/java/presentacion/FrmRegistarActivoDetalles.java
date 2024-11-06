@@ -5,115 +5,121 @@
 package presentacion;
 
 import clases.dominio.Activo;
-import negocio.FachadaNegocio;
+import clases.dominio.Persona;
 import interfaces.INegocio;
 import java.awt.Color;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import negocio.FachadaNegocio;
 
 /**
  *
  * @author IVAN
  */
-public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
+public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
 
     INegocio negocio;
+    private List<Persona> listaPersonas;
 
-    public FrmRegistrarActivoBasico() {
+    public FrmRegistarActivoDetalles(List<Persona> personas) {
         negocio = new FachadaNegocio();
         initComponents();
+        this.listaPersonas = personas;
+        llenarCombo(listaPersonas);
     }
 
-    public void agregarActivo() {
-        // Llamamos al método de validación
+    public void llenarCombo(List<Persona> listaPersonas) {
+
+        cmbPersonas.removeAllItems();
+
+        for (Persona persona : listaPersonas) {
+            cmbPersonas.addItem(persona);
+        }
+    }
+
+    public void agregarActivoConDetalles() {
+
         if (!validarCampos()) {
-            return;  // Si alguna validación falla, se detiene el proceso.
+            return;
         }
 
-        // Obtener valores de los campos
-        String nombre = txtNombre.getText().trim();
+        String nombre = txtNombre.getText();
         String tipo = (String) cmbTipo.getSelectedItem();
-        String numeroSerie = txtNumeroSerie.getText().trim();
+        String numeroSerie = txtNumeroSerie.getText();
         Date fechaSeleccionada = date.getDate();
+        Persona responsable = (Persona) cmbPersonas.getSelectedItem();
+        String estado = (String) cmbEstado.getSelectedItem();
+        String ubicacion = txtUbicacion.getText();
+        String costo = txtCosto.getText();
 
-        // Generar un ID aleatorio (long corto)
+        // Generar un ID aleatorio
         long id = generarIdAleatorio();
 
-        // Crear el objeto Activo
-        Activo activo = new Activo(id, nombre, tipo, numeroSerie, fechaSeleccionada);
-        // Registrar el activo utilizando el método de negocio
+        Activo activo = new Activo(id, nombre, tipo, numeroSerie, costo, estado, fechaSeleccionada, ubicacion, responsable);
+
         if (negocio.registrarActivo(activo)) {
             JOptionPane.showMessageDialog(null, "Activo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
+          
             FrmMenuControlarRegistro frmMenuControlarRegistro = new FrmMenuControlarRegistro();
             frmMenuControlarRegistro.setVisible(true);
 
+        
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Error al registrar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
-// Método para validar los campos
+// Método de validación de campos
     private boolean validarCampos() {
-        String nombre = txtNombre.getText().trim();
-        String tipo = (String) cmbTipo.getSelectedItem();
-        String numeroSerie = txtNumeroSerie.getText().trim();
-        Date fechaSeleccionada = date.getDate();
+        if (txtNombre.getText().trim().isEmpty()
+                || cmbTipo.getSelectedItem() == null
+                || txtNumeroSerie.getText().trim().isEmpty()
+                || date.getDate() == null
+                || cmbPersonas.getSelectedItem() == null
+                || cmbEstado.getSelectedItem() == null
+                || txtUbicacion.getText().trim().isEmpty()
+                || txtCosto.getText().trim().isEmpty()) {
 
-        // Validaciones
-        if (nombre.isEmpty() || tipo == null || numeroSerie.isEmpty() || fechaSeleccionada == null) {
-            JOptionPane.showMessageDialog(null, "Todos los campos deben estar llenos.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
             return false;
         }
 
-        if (!nombre.matches("[a-zA-Z\\s]+")) {
-            JOptionPane.showMessageDialog(null, "El nombre solo puede contener letras y espacios.", "Error", JOptionPane.ERROR_MESSAGE);
+        // Verificación adicional para asegurar que el campo de costo sea numérico
+        try {
+            double costo = Double.parseDouble(txtCosto.getText().trim());
+            if (costo < 0) {
+                JOptionPane.showMessageDialog(null, "El costo no puede ser un valor negativo.", "Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido para el costo.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
-        if (!numeroSerie.matches("\\d+")) {
-            JOptionPane.showMessageDialog(null, "El número de serie solo puede contener números.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        LocalDate fechaActual = LocalDate.now();
-        LocalDate fechaIngresada = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        if (fechaIngresada.isAfter(fechaActual)) {
-            JOptionPane.showMessageDialog(null, "La fecha no puede ser mayor a la fecha actual.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;  // Si todas las validaciones pasan, retornamos true.
+        return true;
     }
 
-// Método para generar un ID aleatorio tipo long
     private long generarIdAleatorio() {
         Random random = new Random();
         // Generamos un número aleatorio entre 1 y 9999 (corto pero tipo long)
         return 1L + random.nextLong(9999);
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel4 = new javax.swing.JLabel();
-        txtNombre1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        txtCosto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
@@ -121,9 +127,14 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
         date = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
-
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel4.setText("Nombre:");
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtUbicacion = new javax.swing.JTextField();
+        cmbEstado = new javax.swing.JComboBox<>();
+        cmbPersonas = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -148,22 +159,22 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
                 btnVolverActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 240, -1));
+        jPanel1.add(btnVolver, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 580, 240, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
 
         jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
-        jLabel1.setText("Registrar activo básico");
+        jLabel1.setText("Registrar activo con detalles");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(158, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 557, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,9 +187,15 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, -1));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Nombre:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 260, -1));
+        jLabel2.setText("Estado:");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, -1, -1));
+
+        txtCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 510, 260, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Tipo:");
@@ -214,7 +231,35 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
                 btnGuardarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 400, 240, -1));
+        jPanel1.add(btnGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 580, 240, -1));
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel4.setText("Nombre:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel7.setText("Ubicación:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel8.setText("Responsable:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel9.setText("Costo:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, -1, -1));
+        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 260, -1));
+        jPanel1.add(txtUbicacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 260, -1));
+
+        cmbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Operativa", "Mantenimiento", "No Operativa" }));
+        jPanel1.add(cmbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 260, -1));
+
+        cmbPersonas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPersonasActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmbPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 260, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -224,7 +269,9 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 643, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -256,10 +303,17 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarMouseExited
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        agregarActivo();
-
+        agregarActivoConDetalles();
 
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostoActionPerformed
+
+    private void cmbPersonasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPersonasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbPersonasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -278,21 +332,20 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRegistarActivoDetalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRegistarActivoDetalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRegistarActivoDetalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmRegistrarActivoBasico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmRegistarActivoDetalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmRegistrarActivoBasico().setVisible(true);
+                //   new FrmRegistarActivoDetalles().setVisible(true);
             }
         });
     }
@@ -300,6 +353,8 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnVolver;
+    private javax.swing.JComboBox<String> cmbEstado;
+    private javax.swing.JComboBox<Persona> cmbPersonas;
     private javax.swing.JComboBox<String> cmbTipo;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JLabel jLabel1;
@@ -308,10 +363,14 @@ public class FrmRegistrarActivoBasico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtNombre1;
     private javax.swing.JTextField txtNumeroSerie;
+    private javax.swing.JTextField txtUbicacion;
     // End of variables declaration//GEN-END:variables
 }
