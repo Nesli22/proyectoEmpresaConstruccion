@@ -32,4 +32,12 @@ public class ControlActivo {
     public Boolean editarActivo(Activo activo){
         return datos.modificarActivo(activo);
     }
+    
+    public List<Activo> consultarActivos(){
+        return datos.consultarActivos();
+    }
+    
+    public Boolean eliminarActivoPorId(Long id){
+        return datos.eliminarActivoPorId(id);
+    }
 }

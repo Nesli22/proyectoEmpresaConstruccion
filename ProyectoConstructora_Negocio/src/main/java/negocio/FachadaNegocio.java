@@ -38,5 +38,18 @@ public class FachadaNegocio implements INegocio {
        return activ.editarActivo(activo);
     }
 
+    @Override
+    public List<Activo> consultarActivos() {
+        return activ.consultarActivos();
+    }
+
+    @Override
+    public Boolean eliminarActivoPorId(Long id) {
+        return activ.eliminarActivoPorId(id);
+    }
+
+   
+    
+
     
 }

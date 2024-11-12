@@ -144,4 +144,71 @@ public class ActivoDAO {
         return activoEncontrado;
     }
 
+    public List<Activo> consultarActivos() {
+        EntityManager entityManager = null;
+        List<Activo> listaActivos = new ArrayList<>();
+
+        try {
+            // Obtener el EntityManager de la conexión.
+            entityManager = conexion.getEM();
+
+            // Iniciar una transacción.
+            entityManager.getTransaction().begin();
+
+            // Realizar la consulta para obtener todos los activos.
+            listaActivos = entityManager.createQuery("SELECT a FROM Activo a", Activo.class)
+                    .getResultList();
+
+            // Confirmar la transacción.
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            // Manejar excepciones y registrar el error.
+            e.printStackTrace();
+        } finally {
+            // Asegurarse de cerrar la conexión incluso si ocurre un error.
+            if (entityManager != null && entityManager.getTransaction().isActive()) {
+                entityManager.close();
+            }
+        }
+
+        // Devolver la lista de activos encontrados.
+        return listaActivos;
+    }
+
+    public boolean eliminarActivoPorID(Long id) {
+        EntityManager entityManager = null;
+        boolean eliminado = false;
+
+        try {
+            // Obtener el EntityManager de la conexión.
+            entityManager = conexion.getEM();
+
+            // Iniciar una transacción.
+            entityManager.getTransaction().begin();
+
+            // Buscar el activo por su ID.
+            Activo activo = entityManager.find(Activo.class, id);
+
+            if (activo != null) {
+                // Si el activo existe, eliminarlo.
+                entityManager.remove(activo);
+                // Confirmar la transacción.
+                entityManager.getTransaction().commit();
+                eliminado = true;
+            } else {
+                System.out.println("No se encontró el activo con el ID proporcionado.");
+            }
+        } catch (Exception e) {
+            // Manejar excepciones y registrar el error.
+            e.printStackTrace();
+        } finally {
+            // Asegurarse de cerrar la conexión incluso si ocurre un error.
+            if (entityManager != null && entityManager.getTransaction().isActive()) {
+                entityManager.close();
+            }
+        }
+
+        return eliminado;
+    }
+
 }

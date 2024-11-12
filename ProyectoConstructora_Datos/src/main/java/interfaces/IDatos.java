@@ -17,4 +17,6 @@ public interface IDatos {
       public List<Activo> consultarEstado(String criterio);
       public List<Persona> recuperarPersonas();
       public Boolean modificarActivo(Activo Activo);
+      public List<Activo> consultarActivos();
+      public Boolean eliminarActivoPorId(Long id);
 }

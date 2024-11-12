@@ -37,5 +37,15 @@ public class FachadaDatos implements IDatos{
     public Boolean modificarActivo(Activo Activo) {
         return activ.modificarActivo(Activo);
     }
+
+    @Override
+    public List<Activo> consultarActivos() {
+        return activ.consultarActivos();
+    }
+
+    @Override
+    public Boolean eliminarActivoPorId(Long id) {
+        return activ.eliminarActivoPorID(id);
+    }
     
 }
