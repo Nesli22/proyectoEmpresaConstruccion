@@ -4,7 +4,7 @@
  */
 package datos;
 
-import clases.dominio.Persona;
+import dominio.Persona;
 import java.util.List;
 import javax.persistence.EntityManager;
 

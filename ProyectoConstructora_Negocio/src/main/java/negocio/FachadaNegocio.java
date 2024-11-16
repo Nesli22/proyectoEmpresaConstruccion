@@ -5,8 +5,8 @@
 package negocio;
 
 import interfaces.INegocio;
-import clases.dominio.Activo;
-import clases.dominio.Persona;
+import dominio.Activo;
+import dominio.Persona;
 import java.util.List;
 
 /**

@@ -1,14 +1,14 @@
-package clases.dominio;
+package dominio;
 
-import clases.dominio.Mantenimiento;
-import clases.dominio.Persona;
+import dominio.Mantenimiento;
+import dominio.Persona;
 import java.util.Date;
 import javax.annotation.processing.Generated;
 import javax.persistence.metamodel.ListAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-12T11:56:15", comments="EclipseLink-2.7.10.v20211216-rNA")
+@Generated(value="org.eclipse.persistence.internal.jpa.modelgen.CanonicalModelProcessor", date="2024-11-15T21:56:37", comments="EclipseLink-2.7.10.v20211216-rNA")
 @StaticMetamodel(Activo.class)
 public class Activo_ { 
 

@@ -5,8 +5,8 @@
 package datos;
 
 import interfaces.IDatos;
-import clases.dominio.Activo;
-import clases.dominio.Persona;
+import dominio.Activo;
+import dominio.Persona;
 import java.util.List;
 
 /**
