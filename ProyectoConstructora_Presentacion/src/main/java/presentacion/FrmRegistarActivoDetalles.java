@@ -74,36 +74,50 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
 
     }
 
-// Método de validación de campos
-    private boolean validarCampos() {
-        if (txtNombre.getText().trim().isEmpty()
-                || cmbTipo.getSelectedItem() == null
-                || txtNumeroSerie.getText().trim().isEmpty()
-                || date.getDate() == null
-                || cmbPersonas.getSelectedItem() == null
-                || cmbEstado.getSelectedItem() == null
-                || txtUbicacion.getText().trim().isEmpty()
-                || txtCosto.getText().trim().isEmpty()) {
+private boolean validarCampos() {
+    String nombre = txtNombre.getText().trim();
+    String numeroSerie = txtNumeroSerie.getText().trim();
 
-            JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return false;
-        }
+    // Validar si algún campo obligatorio está vacío
+    if (nombre.isEmpty()
+            || cmbTipo.getSelectedItem() == null
+            || numeroSerie.isEmpty()
+            || date.getDate() == null
+            || cmbPersonas.getSelectedItem() == null
+            || cmbEstado.getSelectedItem() == null
+            || txtUbicacion.getText().trim().isEmpty()
+            || txtCosto.getText().trim().isEmpty()) {
 
-        // Verificación adicional para asegurar que el campo de costo sea numérico
-        try {
-            double costo = Double.parseDouble(txtCosto.getText().trim());
-            if (costo < 0) {
-                JOptionPane.showMessageDialog(null, "El costo no puede ser un valor negativo.", "Error", JOptionPane.ERROR_MESSAGE);
-                return false;
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Ingrese un número válido para el costo.", "Error", JOptionPane.ERROR_MESSAGE);
-            return false;
-        }
-
-        return true;
+        JOptionPane.showMessageDialog(null, "Por favor complete todos los campos.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return false;
     }
 
+    // Validación para asegurar que el nombre no contenga números ni signos
+    if (!nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+")) {
+        JOptionPane.showMessageDialog(null, "El nombre no debe contener números ni signos.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Validación para asegurar que el número de serie solo contenga dígitos
+    if (!numeroSerie.matches("\\d+")) {
+        JOptionPane.showMessageDialog(null, "El número de serie solo debe contener números.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    // Verificación adicional para asegurar que el campo de costo sea numérico
+    try {
+        double costo = Double.parseDouble(txtCosto.getText().trim());
+        if (costo < 0) {
+            JOptionPane.showMessageDialog(null, "El costo no puede ser un valor negativo.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Ingrese un número válido para el costo.", "Error", JOptionPane.ERROR_MESSAGE);
+        return false;
+    }
+
+    return true;
+}
     private long generarIdAleatorio() {
         Random random = new Random();
         // Generamos un número aleatorio entre 1 y 9999 (corto pero tipo long)
