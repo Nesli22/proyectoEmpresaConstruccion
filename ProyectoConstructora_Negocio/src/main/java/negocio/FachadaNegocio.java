@@ -6,6 +6,7 @@ package negocio;
 
 import interfaces.INegocio;
 import clases.dominio.Activo;
+import clases.dominio.Mantenimiento;
 import clases.dominio.Persona;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class FachadaNegocio implements INegocio {
 
     private ControlActivo activ = new ControlActivo();
     private ControlPersona persona = new ControlPersona();
+    private ControlMantenimiento mant = new ControlMantenimiento();
     
     @Override
     public Boolean registrarActivo(Activo activo) {
@@ -38,6 +40,8 @@ public class FachadaNegocio implements INegocio {
        return activ.editarActivo(activo);
     }
 
+<<<<<<< Updated upstream
+=======
     @Override
     public List<Activo> consultarActivos() {
         return activ.consultarActivos();
@@ -48,8 +52,24 @@ public class FachadaNegocio implements INegocio {
         return activ.eliminarActivoPorId(id);
     }
 
+    @Override
+    public Activo buscarActivoId(Long id) {
+        return activ.buscarActivoId(id);
+    }
+
+    @Override
+    public Boolean registrarMantenimiento(Mantenimiento mantenimiento) {
+       return mant.registarMantenimiento(mantenimiento);
+    }
+
+    @Override
+    public List<Mantenimiento> consultarMantenimientos() {
+        return mant.consultarMantenimiento();
+    }
+
    
     
 
+>>>>>>> Stashed changes
     
 }

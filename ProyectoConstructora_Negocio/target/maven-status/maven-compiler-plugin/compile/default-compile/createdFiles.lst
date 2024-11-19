@@ -1,4 +1,8 @@
-negocio\ControlActivo.class
-interfaces\INegocio.class
-negocio\FachadaNegocio.class
-negocio\ControlPersona.class
+<<<<<<< Updated upstream
+negocio/FachadaNegocio.class
+negocio/ControlPersona.class
+interfaces/INegocio.class
+negocio/ControlActivo.class
+=======
+negocio/ControlMantenimiento.class
+>>>>>>> Stashed changes
