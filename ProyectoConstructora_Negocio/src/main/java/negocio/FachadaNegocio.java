@@ -40,6 +40,7 @@ public class FachadaNegocio implements INegocio {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     @Override
     public List<Activo> consultarActivos() {
         return activ.consultarActivos();
@@ -53,6 +54,8 @@ public class FachadaNegocio implements INegocio {
    
     
 
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
