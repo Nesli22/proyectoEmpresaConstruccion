@@ -1,11 +1,4 @@
-<<<<<<< HEAD
 negocio\ControlActivo.class
 interfaces\INegocio.class
 negocio\FachadaNegocio.class
 negocio\ControlPersona.class
-=======
-negocio/FachadaNegocio.class
-negocio/ControlPersona.class
-interfaces/INegocio.class
-negocio/ControlActivo.class
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)

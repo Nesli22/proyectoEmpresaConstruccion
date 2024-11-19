@@ -29,21 +29,15 @@ public class FrmMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-<<<<<<< HEAD
         btnEliminarActivo = new javax.swing.JButton();
-=======
-        btnRegistrarActivo = new javax.swing.JButton();
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         btnConsultarActivo = new javax.swing.JButton();
         btnModificarActivo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         btnConsultarActivo1 = new javax.swing.JButton();
-<<<<<<< HEAD
         btnRegistrarActivo1 = new javax.swing.JButton();
         btnEliminarActivo1 = new javax.swing.JButton();
-=======
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -74,9 +68,9 @@ public class FrmMenu extends javax.swing.JFrame {
         jLabel1.setText("Administrar Activos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
-        jLabel1.setText("Administrar Activos");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+        jLabel2.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel2.setText("Administrar Activos");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
         btnConsultarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnConsultarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -95,11 +89,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivoActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
-        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 290, -1));
-=======
-        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, -1));
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
+        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 290, -1));
 
         btnModificarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnModificarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -145,8 +135,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivo1ActionPerformed(evt);
             }
         });
-<<<<<<< HEAD
-        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 290, -1));
+        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 290, -1));
 
         btnRegistrarActivo1.setBackground(new java.awt.Color(0, 153, 204));
         btnRegistrarActivo1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -185,9 +174,6 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 290, -1));
-=======
-        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 290, -1));
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -197,11 +183,7 @@ public class FrmMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
-=======
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
         );
 
         pack();
@@ -258,7 +240,6 @@ public class FrmMenu extends javax.swing.JFrame {
         frmVerificarEstado.setVisible(true);
     }//GEN-LAST:event_btnConsultarActivo1ActionPerformed
 
-<<<<<<< HEAD
     private void btnRegistrarActivo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivo1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActivo1MouseEntered
@@ -287,8 +268,6 @@ public class FrmMenu extends javax.swing.JFrame {
         frmEliminarActivos.setVisible(true);
     }//GEN-LAST:event_btnEliminarActivo1ActionPerformed
 
-=======
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
     /**
      * @param args the command line arguments
      */
@@ -327,14 +306,12 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultarActivo;
     private javax.swing.JButton btnConsultarActivo1;
-<<<<<<< HEAD
     private javax.swing.JButton btnEliminarActivo;
     private javax.swing.JButton btnEliminarActivo1;
-=======
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
     private javax.swing.JButton btnModificarActivo;
     private javax.swing.JButton btnRegistrarActivo1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables

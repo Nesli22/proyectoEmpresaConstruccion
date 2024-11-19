@@ -29,11 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-<<<<<<< HEAD
           <Component id="jPanel1" alignment="0" pref="414" max="32767" attributes="0"/>
-=======
-          <Component id="jPanel1" alignment="0" pref="343" max="32767" attributes="0"/>
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
       </Group>
     </DimensionLayout>
   </Layout>
@@ -86,7 +82,7 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Roboto Medium" size="36" style="1"/>
@@ -119,11 +115,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-              <AbsoluteConstraints x="50" y="350" width="290" height="-1"/>
-=======
-              <AbsoluteConstraints x="50" y="290" width="290" height="-1"/>
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
+              <AbsoluteConstraints x="50" y="340" width="290" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -197,8 +189,7 @@
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
-              <AbsoluteConstraints x="50" y="310" width="290" height="-1"/>
+              <AbsoluteConstraints x="50" y="300" width="290" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -247,9 +238,6 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="50" y="220" width="290" height="-1"/>
-=======
-              <AbsoluteConstraints x="50" y="240" width="290" height="-1"/>
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
             </Constraint>
           </Constraints>
         </Component>

@@ -38,7 +38,6 @@ public class FachadaNegocio implements INegocio {
        return activ.editarActivo(activo);
     }
 
-<<<<<<< HEAD
     @Override
     public List<Activo> consultarActivos() {
         return activ.consultarActivos();
@@ -48,11 +47,5 @@ public class FachadaNegocio implements INegocio {
     public Boolean eliminarActivoPorId(Long id) {
         return activ.eliminarActivoPorId(id);
     }
-
-   
-    
-
-=======
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
     
 }
