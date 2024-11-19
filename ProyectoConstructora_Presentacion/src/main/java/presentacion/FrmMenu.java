@@ -30,7 +30,11 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnEliminarActivo = new javax.swing.JButton();
+=======
+        btnRegistrarActivo = new javax.swing.JButton();
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
         btnRegistrarActivo = new javax.swing.JButton();
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
@@ -40,8 +44,11 @@ public class FrmMenu extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         btnConsultarActivo1 = new javax.swing.JButton();
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnRegistrarActivo1 = new javax.swing.JButton();
         btnEliminarActivo1 = new javax.swing.JButton();
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 
@@ -78,6 +85,10 @@ public class FrmMenu extends javax.swing.JFrame {
         jLabel1.setText("Administrar Activos");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
 
+        jLabel1.setFont(new java.awt.Font("Roboto Medium", 1, 36)); // NOI18N
+        jLabel1.setText("Administrar Activos");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, -1, -1));
+
         btnConsultarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnConsultarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnConsultarActivo.setForeground(new java.awt.Color(255, 255, 255));
@@ -96,7 +107,11 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
         jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 290, -1));
+=======
+        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, -1));
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
         jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, -1));
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
@@ -146,6 +161,7 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
         jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 290, -1));
 
         btnRegistrarActivo1.setBackground(new java.awt.Color(0, 153, 204));
@@ -188,6 +204,9 @@ public class FrmMenu extends javax.swing.JFrame {
 =======
         jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 290, -1));
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
+=======
+        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 290, -1));
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -198,7 +217,11 @@ public class FrmMenu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
 <<<<<<< HEAD
+<<<<<<< HEAD
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+=======
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
@@ -259,6 +282,7 @@ public class FrmMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarActivo1ActionPerformed
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void btnRegistrarActivo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivo1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActivo1MouseEntered
@@ -287,6 +311,8 @@ public class FrmMenu extends javax.swing.JFrame {
         frmEliminarActivos.setVisible(true);
     }//GEN-LAST:event_btnEliminarActivo1ActionPerformed
 
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
     /**
@@ -328,8 +354,11 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultarActivo;
     private javax.swing.JButton btnConsultarActivo1;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private javax.swing.JButton btnEliminarActivo;
     private javax.swing.JButton btnEliminarActivo1;
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
     private javax.swing.JButton btnModificarActivo;

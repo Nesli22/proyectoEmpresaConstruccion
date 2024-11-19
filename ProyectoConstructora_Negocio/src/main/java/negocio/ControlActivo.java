@@ -33,6 +33,7 @@ public class ControlActivo {
         return datos.modificarActivo(activo);
     }
 <<<<<<< HEAD
+<<<<<<< HEAD
     
     public List<Activo> consultarActivos(){
         return datos.consultarActivos();
@@ -41,6 +42,8 @@ public class ControlActivo {
     public Boolean eliminarActivoPorId(Long id){
         return datos.eliminarActivoPorId(id);
     }
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 }

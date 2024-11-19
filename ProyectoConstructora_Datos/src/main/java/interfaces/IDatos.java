@@ -18,8 +18,11 @@ public interface IDatos {
       public List<Persona> recuperarPersonas();
       public Boolean modificarActivo(Activo Activo);
 <<<<<<< HEAD
+<<<<<<< HEAD
       public List<Activo> consultarActivos();
       public Boolean eliminarActivoPorId(Long id);
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 }
