@@ -100,7 +100,42 @@ class FachadaNegocioTest {
         assertTrue(exito, "La edición del activo debería ser exitosa");
     }
 
-  private Activo crearActivoPrueba() {
+    /**
+     * Prueba para consultar todos los activos. Se verifica que el resultado no
+     * sea nulo y que contenga al menos un activo.
+     */
+    @Test
+    @DisplayName("Consultar todos los activos correctamente")
+    void consultarActivosTest() {
+        Activo activoConsulta = this.crearActivoPrueba();
+        fachadaNegocio.registrarActivo(activoConsulta);
+        List<Activo> resultado = this.fachadaNegocio.consultarActivos();
+        assertNotNull(resultado, "La lista de activos no debería ser nula");
+        assertFalse(resultado.isEmpty(), "La lista de activos debería contener al menos un activo");
+        boolean exito = resultado.stream().anyMatch(activo -> activo instanceof Activo);
+        assertTrue(exito, "Se deben obtener activos correctamente de la base de datos");
+    }
+
+    /**
+     * Prueba para eliminar un activo por su ID. Se crea un activo, se registra
+     * y luego se elimina.
+     */
+    @Test
+    @DisplayName("Eliminar un activo por ID correctamente")
+    void eliminarActivoPorIdTest() {
+        Activo activoEliminar = this.crearActivoPrueba();
+        fachadaNegocio.registrarActivo(activoEliminar);
+        Long idActivo = activoEliminar.getId();
+        boolean exitoEliminacion = fachadaNegocio.eliminarActivoPorId(idActivo);
+        assertTrue(exitoEliminacion, "La eliminación del activo debería ser exitosa");
+
+        // Verificar que el activo ya no esté en la lista
+        List<Activo> activosRestantes = fachadaNegocio.consultarActivos();
+        boolean existe = activosRestantes.stream().anyMatch(activo -> activo.getId().equals(idActivo));
+        assertFalse(existe, "El activo no debería existir después de ser eliminado");
+    }
+
+    private Activo crearActivoPrueba() {
         return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
     }
 }
