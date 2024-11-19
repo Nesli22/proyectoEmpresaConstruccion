@@ -5,6 +5,7 @@
 package interfaces;
 
 import clases.dominio.Activo;
+import clases.dominio.Mantenimiento;
 import clases.dominio.Persona;
 import java.util.List;
 
@@ -17,4 +18,12 @@ public interface IDatos {
       public List<Activo> consultarEstado(String criterio);
       public List<Persona> recuperarPersonas();
       public Boolean modificarActivo(Activo Activo);
+<<<<<<< Updated upstream
+=======
+      public List<Activo> consultarActivos();
+      public Boolean eliminarActivoPorId(Long id);
+      public Activo buscarActivoId(Long id);
+      public List<Mantenimiento> consultarMantenimientos();
+      public Boolean registrarMantenimiento(Mantenimiento mantenimiento);
+>>>>>>> Stashed changes
 }

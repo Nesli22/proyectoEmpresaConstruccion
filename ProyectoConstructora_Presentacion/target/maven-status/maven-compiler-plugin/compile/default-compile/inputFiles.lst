@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmMenu.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmRegistarActivoDetalles.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmEditarActivo.java
@@ -5,4 +6,19 @@
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmConsultarEstado.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmConsultarAsignado.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmModificarActivo.java
+=======
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmProgramarMantenimiento.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmEliminarActivo.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmRegistarActivoDetalles.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmBuscarActivo.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmEditarActivo.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmConsultarEstado.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmConsultarAsignado.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmModificarActivo.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmConsultarMantenimientos.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmMenu.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmMenuControlarRegistro.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmAsignarActivo.java
+/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmAsignarMantenimiento.java
+>>>>>>> Stashed changes
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Presentacion/src/main/java/presentacion/FrmRegistrarActivoBasico.java
