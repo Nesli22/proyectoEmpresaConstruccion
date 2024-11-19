@@ -32,8 +32,7 @@ public class ControlActivo {
     public Boolean editarActivo(Activo activo){
         return datos.modificarActivo(activo);
     }
-<<<<<<< Updated upstream
-=======
+<<<<<<< HEAD
     
     public List<Activo> consultarActivos(){
         return datos.consultarActivos();
@@ -42,9 +41,6 @@ public class ControlActivo {
     public Boolean eliminarActivoPorId(Long id){
         return datos.eliminarActivoPorId(id);
     }
-    
-    public Activo buscarActivoId(Long Id){
-        return datos.buscarActivoId(Id);
-    }
->>>>>>> Stashed changes
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 }

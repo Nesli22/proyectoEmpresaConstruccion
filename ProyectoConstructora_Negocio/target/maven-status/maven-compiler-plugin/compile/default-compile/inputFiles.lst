@@ -7,9 +7,5 @@ C:\Users\IVAN\Documents\GitHub\proyectoEmpresaConstruccion\ProyectoConstructora_
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Negocio/src/main/java/negocio/ControlActivo.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Negocio/src/main/java/interfaces/INegocio.java
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Negocio/src/main/java/negocio/FachadaNegocio.java
-<<<<<<< Updated upstream
-=======
-/Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Negocio/src/main/java/negocio/ControlMantenimiento.java
->>>>>>> Stashed changes
 /Users/juangamez/Documents/GitHub/proyectoEmpresaConstruccion/ProyectoConstructora_Negocio/src/main/java/negocio/ControlPersona.java
->>>>>>> Seleccionar-activo-para-mantenimiento
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)

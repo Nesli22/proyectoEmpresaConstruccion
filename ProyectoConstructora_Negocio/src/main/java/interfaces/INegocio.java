@@ -5,7 +5,6 @@
 package interfaces;
 
 import clases.dominio.Activo;
-import clases.dominio.Mantenimiento;
 import clases.dominio.Persona;
 import java.util.List;
 
@@ -22,17 +21,12 @@ public interface INegocio {
     public List<Persona> recuperarPersonas();
     
     public Boolean editarActivo(Activo activo);
-<<<<<<< Updated upstream
-=======
+<<<<<<< HEAD
     
     public List<Activo> consultarActivos();
     
     public Boolean eliminarActivoPorId(Long id);
     
-    public Activo buscarActivoId(Long id);
-    
-    public Boolean registrarMantenimiento(Mantenimiento mantenimiento);
-    
-    public List<Mantenimiento> consultarMantenimientos();
->>>>>>> Stashed changes
+=======
+>>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 }
