@@ -40,8 +40,6 @@ public class FachadaNegocio implements INegocio {
        return activ.editarActivo(activo);
     }
 
-<<<<<<< Updated upstream
-=======
     @Override
     public List<Activo> consultarActivos() {
         return activ.consultarActivos();
@@ -66,10 +64,5 @@ public class FachadaNegocio implements INegocio {
     public List<Mantenimiento> consultarMantenimientos() {
         return mant.consultarMantenimiento();
     }
-
-   
-    
-
->>>>>>> Stashed changes
     
 }

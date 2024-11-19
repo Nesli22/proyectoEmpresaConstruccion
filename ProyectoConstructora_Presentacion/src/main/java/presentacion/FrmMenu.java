@@ -29,24 +29,19 @@ public class FrmMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-<<<<<<< Updated upstream
         btnRegistrarActivo = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-=======
         btnEliminarActivo = new javax.swing.JButton();
->>>>>>> Stashed changes
         btnConsultarActivo = new javax.swing.JButton();
         btnModificarActivo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnConsultarActivo1 = new javax.swing.JButton();
-<<<<<<< Updated upstream
-=======
         btnRegistrarActivo1 = new javax.swing.JButton();
         btnEliminarActivo1 = new javax.swing.JButton();
         btnConsultarMantenimiento = new javax.swing.JButton();
         btnMantenimientoActivo = new javax.swing.JButton();
->>>>>>> Stashed changes
+
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -90,11 +85,10 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivoActionPerformed(evt);
             }
         });
-<<<<<<< Updated upstream
         jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, -1));
-=======
+
         jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 290, -1));
->>>>>>> Stashed changes
+
 
         btnModificarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnModificarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -149,9 +143,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivo1ActionPerformed(evt);
             }
         });
-<<<<<<< Updated upstream
         jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 290, -1));
-=======
         jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 290, -1));
 
         btnRegistrarActivo1.setBackground(new java.awt.Color(0, 153, 204));
@@ -191,8 +183,6 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 290, -1));
->>>>>>> Stashed changes
-
         btnConsultarMantenimiento.setBackground(new java.awt.Color(0, 153, 204));
         btnConsultarMantenimiento.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnConsultarMantenimiento.setForeground(new java.awt.Color(255, 255, 255));
@@ -239,11 +229,8 @@ public class FrmMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< Updated upstream
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-=======
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
->>>>>>> Stashed changes
         );
 
         pack();
@@ -300,8 +287,7 @@ public class FrmMenu extends javax.swing.JFrame {
         frmVerificarEstado.setVisible(true);
     }//GEN-LAST:event_btnConsultarActivo1ActionPerformed
 
-<<<<<<< Updated upstream
-=======
+
     private void btnRegistrarActivo1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRegistrarActivo1MouseEntered
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRegistrarActivo1MouseEntered
@@ -358,7 +344,6 @@ public class FrmMenu extends javax.swing.JFrame {
         frmProgramarMantenimiento.setVisible(true);
     }//GEN-LAST:event_btnMantenimientoActivoActionPerformed
 
->>>>>>> Stashed changes
     /**
      * @param args the command line arguments
      */
@@ -397,15 +382,13 @@ public class FrmMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConsultarActivo;
     private javax.swing.JButton btnConsultarActivo1;
-<<<<<<< Updated upstream
-=======
     private javax.swing.JButton btnConsultarMantenimiento;
     private javax.swing.JButton btnEliminarActivo;
     private javax.swing.JButton btnEliminarActivo1;
     private javax.swing.JButton btnMantenimientoActivo;
->>>>>>> Stashed changes
     private javax.swing.JButton btnModificarActivo;
     private javax.swing.JButton btnRegistrarActivo;
+    private javax.swing.JButton btnRegistrarActivo1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

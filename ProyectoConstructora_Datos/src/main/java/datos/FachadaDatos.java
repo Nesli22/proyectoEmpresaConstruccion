@@ -39,8 +39,6 @@ public class FachadaDatos implements IDatos{
     public Boolean modificarActivo(Activo Activo) {
         return activ.modificarActivo(Activo);
     }
-<<<<<<< Updated upstream
-=======
 
     @Override
     public List<Activo> consultarActivos() {
@@ -67,6 +65,5 @@ public class FachadaDatos implements IDatos{
     public Boolean registrarMantenimiento(Mantenimiento mantenimiento) {
         return mant.registrarActivo(mantenimiento);
     }
->>>>>>> Stashed changes
-    
+
 }

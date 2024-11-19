@@ -22,9 +22,7 @@ public interface INegocio {
     public List<Persona> recuperarPersonas();
     
     public Boolean editarActivo(Activo activo);
-<<<<<<< Updated upstream
-=======
-    
+
     public List<Activo> consultarActivos();
     
     public Boolean eliminarActivoPorId(Long id);
@@ -34,5 +32,5 @@ public interface INegocio {
     public Boolean registrarMantenimiento(Mantenimiento mantenimiento);
     
     public List<Mantenimiento> consultarMantenimientos();
->>>>>>> Stashed changes
+
 }
