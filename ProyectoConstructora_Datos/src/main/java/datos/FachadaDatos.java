@@ -39,7 +39,6 @@ public class FachadaDatos implements IDatos{
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 
     @Override
     public List<Activo> consultarActivos() {
@@ -50,8 +49,6 @@ public class FachadaDatos implements IDatos{
     public Boolean eliminarActivoPorId(Long id) {
         return activ.eliminarActivoPorID(id);
     }
-=======
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
 >>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
 =======
