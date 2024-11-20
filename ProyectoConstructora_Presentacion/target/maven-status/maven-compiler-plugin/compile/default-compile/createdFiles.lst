@@ -67,6 +67,7 @@ presentacion/FrmEliminarActivo$3.class
 presentacion/FrmConsultarEstado.class
 presentacion/FrmMenu$15.class
 presentacion/FrmMenu$3.class
+presentacion/FrmMenu$18.class
 presentacion/FrmMenu$6.class
 presentacion/FrmRegistrarActivoBasico$2.class
 presentacion/FrmProgramarMantenimiento.class
@@ -85,6 +86,7 @@ presentacion/FrmRegistrarActivoBasico$3.class
 presentacion/FrmConsultarEstado$3.class
 presentacion/FrmConsultarAsignado.class
 presentacion/FrmEliminarActivo$4.class
+presentacion/FrmMenu$17.class
 presentacion/FrmEditarActivo$5.class
 presentacion/FrmMenuControlarRegistro$6.class
 presentacion/FrmMenu$5.class
