@@ -30,8 +30,6 @@ public class FrmMenu extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         btnRegistrarActivo = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        btnEliminarActivo = new javax.swing.JButton();
         btnConsultarActivo = new javax.swing.JButton();
         btnModificarActivo = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -41,7 +39,6 @@ public class FrmMenu extends javax.swing.JFrame {
         btnEliminarActivo1 = new javax.swing.JButton();
         btnConsultarMantenimiento = new javax.swing.JButton();
         btnMantenimientoActivo = new javax.swing.JButton();
-
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -85,10 +82,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 290, -1));
-
-        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 290, -1));
-
+        jPanel1.add(btnConsultarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 290, -1));
 
         btnModificarActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnModificarActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -107,7 +101,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnModificarActivoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 290, -1));
+        jPanel1.add(btnModificarActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 290, -1));
 
         jPanel2.setBackground(new java.awt.Color(0, 153, 255));
         jPanel2.setForeground(new java.awt.Color(0, 153, 255));
@@ -143,8 +137,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarActivo1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 290, -1));
-        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 290, -1));
+        jPanel1.add(btnConsultarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 290, -1));
 
         btnRegistrarActivo1.setBackground(new java.awt.Color(0, 153, 204));
         btnRegistrarActivo1.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -183,6 +176,7 @@ public class FrmMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btnEliminarActivo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, 290, -1));
+
         btnConsultarMantenimiento.setBackground(new java.awt.Color(0, 153, 204));
         btnConsultarMantenimiento.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         btnConsultarMantenimiento.setForeground(new java.awt.Color(255, 255, 255));
@@ -200,7 +194,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnConsultarMantenimientoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConsultarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 420, 290, -1));
+        jPanel1.add(btnConsultarMantenimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, 290, -1));
 
         btnMantenimientoActivo.setBackground(new java.awt.Color(0, 153, 204));
         btnMantenimientoActivo.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
@@ -219,7 +213,7 @@ public class FrmMenu extends javax.swing.JFrame {
                 btnMantenimientoActivoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnMantenimientoActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 380, 290, -1));
+        jPanel1.add(btnMantenimientoActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 350, 290, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -229,8 +223,9 @@ public class FrmMenu extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 445, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -383,7 +378,6 @@ public class FrmMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnConsultarActivo;
     private javax.swing.JButton btnConsultarActivo1;
     private javax.swing.JButton btnConsultarMantenimiento;
-    private javax.swing.JButton btnEliminarActivo;
     private javax.swing.JButton btnEliminarActivo1;
     private javax.swing.JButton btnMantenimientoActivo;
     private javax.swing.JButton btnModificarActivo;

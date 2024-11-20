@@ -170,8 +170,7 @@ void buscarActivoPorIdTest() {
 @DisplayName("Obtener todos los mantenimientos")
 void obtenerMantenimientosTest() {
     // Registro de un mantenimiento de prueba para asegurarse de que haya datos
-    Mantenimiento mantenimientoPrueba = new Mantenimiento();
-    mantenimientoPrueba.setTipo("Mantenimiento de prueba");
+     Mantenimiento mantenimientoPrueba = this.crearMantenimientoPrueba();
     fachadaNegocio.registrarMantenimiento(mantenimientoPrueba);
 
     List<Mantenimiento> mantenimientos = fachadaNegocio.consultarMantenimientos();
@@ -186,8 +185,7 @@ void obtenerMantenimientosTest() {
 @Test
 @DisplayName("Registrar un mantenimiento")
 void registrarMantenimientoTest() {
-    Mantenimiento mantenimientoPrueba = new Mantenimiento();
-    mantenimientoPrueba.setTipo("Mantenimiento preventivo");
+    Mantenimiento mantenimientoPrueba = this.crearMantenimientoPrueba();
 
     boolean exito = fachadaNegocio.registrarMantenimiento(mantenimientoPrueba);
     assertTrue(exito, "El registro del mantenimiento debería ser exitoso");
@@ -197,4 +195,9 @@ void registrarMantenimientoTest() {
   private Activo crearActivoPrueba() {
         return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
     }
+  
+  private Mantenimiento crearMantenimientoPrueba() {
+    Activo act = crearActivoPrueba();
+    return new Mantenimiento(1L, Date.from(Instant.now()), "Otro", act);
+}
 }
