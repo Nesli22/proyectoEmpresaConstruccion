@@ -2,6 +2,7 @@ package pruebas;
 
 import negocio.FachadaNegocio;
 import clases.dominio.Activo;
+import clases.dominio.Mantenimiento;
 import clases.dominio.Persona;
 import interfaces.INegocio;
 import java.time.Instant;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.Date;
 import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * Clase de prueba para verificar las funcionalidades de la clase
@@ -82,7 +84,7 @@ class FachadaNegocioTest {
         assertFalse(resultado.isEmpty(), "La lista de activos no debería estar vacía");
         boolean exito = resultado.stream().anyMatch(activo -> activo instanceof Activo);
         assertTrue(exito, "Se deben obtener activos correctamente de la base de datos");
-          assertEquals("Operativo", resultado.get(resultado.size() - 1).getEstado());
+        assertEquals("Operativo", resultado.get(resultado.size() - 1).getEstado());
     }
 
     /**
@@ -135,7 +137,67 @@ class FachadaNegocioTest {
         assertFalse(existe, "El activo no debería existir después de ser eliminado");
     }
 
+    /**
+     * Prueba para buscar un activo por su ID. Se verifica que, al buscar un ID
+     * válido, se retorne el activo correspondiente, y que al buscar un ID nulo
+     * o inexistente, el resultado sea correcto.
+     */
+    @Test
+    @DisplayName("Buscar un activo por ID")
+    void buscarActivoPorIdTest() {
+        Activo activoPrueba = this.crearActivoPrueba();
+        fachadaNegocio.registrarActivo(activoPrueba);
+
+        // Prueba con un ID válido
+        Activo activoEncontrado = fachadaNegocio.buscarActivoId(activoPrueba.getId());
+        assertNotNull(activoEncontrado, "El activo debería encontrarse en la base de datos");
+        assertEquals(activoPrueba.getId(), activoEncontrado.getId(), "El ID del activo encontrado debe coincidir");
+
+        // Prueba con un ID inexistente
+        Activo activoNoExistente = fachadaNegocio.buscarActivoId(999L);
+        assertNull(activoNoExistente, "El activo no debería encontrarse con un ID inexistente");
+
+        // Prueba con un ID nulo
+        Activo activoIdNulo = fachadaNegocio.buscarActivoId(null);
+        assertNull(activoIdNulo, "El resultado debe ser nulo cuando el ID es nulo");
+    }
+
+    /**
+     * Prueba para obtener todos los mantenimientos de la base de datos. Se
+     * verifica que el resultado no sea nulo y que contenga al menos un
+     * mantenimiento.
+     */
+    @Test
+    @DisplayName("Obtener todos los mantenimientos")
+    void obtenerMantenimientosTest() {
+        // Registro de un mantenimiento de prueba para asegurarse de que haya datos
+        Mantenimiento mantenimientoPrueba = this.crearMantenimientoPrueba();
+        fachadaNegocio.registrarMantenimiento(mantenimientoPrueba);
+
+        List<Mantenimiento> mantenimientos = fachadaNegocio.consultarMantenimientos();
+        assertNotNull(mantenimientos, "La lista de mantenimientos no debería ser nula");
+        assertFalse(mantenimientos.isEmpty(), "La lista de mantenimientos debería contener al menos un mantenimiento");
+    }
+
+    /**
+     * Prueba para registrar un mantenimiento en la base de datos. Verifica que
+     * el registro sea exitoso.
+     */
+    @Test
+    @DisplayName("Registrar un mantenimiento")
+    void registrarMantenimientoTest() {
+        Mantenimiento mantenimientoPrueba = this.crearMantenimientoPrueba();
+
+        boolean exito = fachadaNegocio.registrarMantenimiento(mantenimientoPrueba);
+        assertTrue(exito, "El registro del mantenimiento debería ser exitoso");
+    }
+
     private Activo crearActivoPrueba() {
         return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
+    }
+
+    private Mantenimiento crearMantenimientoPrueba() {
+        Activo act = crearActivoPrueba();
+        return new Mantenimiento(1L, Date.from(Instant.now()), "Otro", act);
     }
 }

@@ -307,10 +307,9 @@ public class FrmAsignarActivo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMouseExited
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
 
-        frmModificarActvio.setVisible(true);
-
+        FrmBuscarActivo frmBuscarActivo = new FrmBuscarActivo();
+        frmBuscarActivo.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed
 
@@ -324,14 +323,10 @@ public class FrmAsignarActivo extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarActivo();
-        
-         FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
 
-        frmModificarActvio.setVisible(true);
-
+        FrmBuscarActivo frmBuscarActivo = new FrmBuscarActivo();
+        frmBuscarActivo.setVisible(true);
         dispose();
-
-
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostoActionPerformed

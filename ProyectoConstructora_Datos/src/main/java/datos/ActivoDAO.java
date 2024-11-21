@@ -114,36 +114,7 @@ public class ActivoDAO {
             }
         }
     }
-
-    public Activo buscarActivoPorId(Long id) {
-        if (id == null) {
-            System.out.println("El ID no puede ser nulo.");
-            return null;  // Manejo de errores si ID es nulo
-        }
-
-        Activo activoEncontrado = null;
-        EntityManager entityManager = null;
-
-        try {
-            entityManager = conexion.getEM();
-            activoEncontrado = entityManager.createQuery(
-                    "SELECT a FROM Activo a WHERE a.id = :id", Activo.class)
-                    .setParameter("id", id)
-                    .getSingleResult();
-        } catch (NoResultException e) {
-            System.out.println("No se encontró ningún activo con el id proporcionado.");
-        } catch (NonUniqueResultException e) {
-            System.out.println("Se encontró más de un activo con el mismo id.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (entityManager != null) {
-                entityManager.close();  // Asegúrate de cerrar el EntityManager
-            }
-        }
-        return activoEncontrado;
-    }
-
+    
     public List<Activo> consultarActivos() {
         EntityManager entityManager = null;
         List<Activo> listaActivos = new ArrayList<>();
@@ -174,7 +145,7 @@ public class ActivoDAO {
         // Devolver la lista de activos encontrados.
         return listaActivos;
     }
-
+    
     public boolean eliminarActivoPorID(Long id) {
         EntityManager entityManager = null;
         boolean eliminado = false;
@@ -210,5 +181,38 @@ public class ActivoDAO {
 
         return eliminado;
     }
+
+    public Activo buscarActivoPorId(Long id) {
+        if (id == null) {
+            System.out.println("El ID no puede ser nulo.");
+            return null;  // Manejo de errores si ID es nulo
+        }
+
+        Activo activoEncontrado = null;
+        EntityManager entityManager = null;
+
+        try {
+            entityManager = conexion.getEM();
+            activoEncontrado = entityManager.createQuery(
+                    "SELECT a FROM Activo a WHERE a.id = :id", Activo.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            System.out.println("No se encontró ningún activo con el id proporcionado.");
+        } catch (NonUniqueResultException e) {
+            System.out.println("Se encontró más de un activo con el mismo id.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();  // Asegúrate de cerrar el EntityManager
+            }
+        }
+        return activoEncontrado;
+    }
+
+   
+
+   
 
 }

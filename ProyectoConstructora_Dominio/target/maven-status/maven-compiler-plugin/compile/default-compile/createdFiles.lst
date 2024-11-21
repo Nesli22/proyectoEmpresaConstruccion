@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-clases\dominio\Mantenimiento_.class
-clases\dominio\Persona_.class
-clases\dominio\Activo.class
-clases\dominio\Persona.class
-clases\dominio\Activo_.class
-clases\dominio\Mantenimiento.class
-=======
 clases/dominio/Persona_.class
 clases/dominio/Activo.class
 clases/dominio/Persona.class
 clases/dominio/Mantenimiento_.class
 clases/dominio/Mantenimiento.class
 clases/dominio/Activo_.class
->>>>>>> parent of f42b81d (Funcionalidad Programar Mantenimiento)
