@@ -4,8 +4,8 @@
  */
 package presentacion;
 
-import clases.dominio.Activo;
-import clases.dominio.Persona;
+import dominio.Activo;
+import dominio.Persona;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;

@@ -1,9 +1,9 @@
 package pruebas;
 
 import negocio.FachadaNegocio;
-import clases.dominio.Activo;
-import clases.dominio.Mantenimiento;
-import clases.dominio.Persona;
+import dominio.Activo;
+import dominio.Mantenimiento;
+import dominio.Persona;
 import interfaces.INegocio;
 import java.time.Instant;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -179,17 +179,21 @@ class FachadaNegocioTest {
         assertFalse(mantenimientos.isEmpty(), "La lista de mantenimientos debería contener al menos un mantenimiento");
     }
 
-    /**
-     * Prueba para registrar un mantenimiento en la base de datos. Verifica que
-     * el registro sea exitoso.
-     */
     @Test
-    @DisplayName("Registrar un mantenimiento")
+    @DisplayName("Registrar un mantenimiento correctamente")
     void registrarMantenimientoTest() {
-        Mantenimiento mantenimientoPrueba = this.crearMantenimientoPrueba();
+        // Registrar el activo de prueba
+        Activo activo = crearActivoPrueba();
+        boolean exitoActivo = fachadaNegocio.registrarActivo(activo);
+        assertTrue(exitoActivo, "El registro del activo debería ser exitoso");
 
-        boolean exito = fachadaNegocio.registrarMantenimiento(mantenimientoPrueba);
-        assertTrue(exito, "El registro del mantenimiento debería ser exitoso");
+        // Verificar que el ID del activo no sea nulo
+        assertNotNull(activo.getId(), "El ID del activo debería haberse generado");
+
+        // Crear el mantenimiento asociado al activo registrado
+        Mantenimiento mantenimiento = new Mantenimiento(1l, Date.from(Instant.now()), "Otro", activo);
+        boolean exitoMantenimiento = fachadaNegocio.registrarMantenimiento(mantenimiento);
+        assertTrue(exitoMantenimiento, "El registro del mantenimiento debería ser exitoso");
     }
 
     private Activo crearActivoPrueba() {

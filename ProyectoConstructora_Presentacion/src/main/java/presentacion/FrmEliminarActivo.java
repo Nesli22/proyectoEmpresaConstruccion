@@ -4,7 +4,7 @@
  */
 package presentacion;
 
-import clases.dominio.Activo;
+import dominio.Activo;
 import interfaces.INegocio;
 import java.awt.Color;
 import java.util.List;

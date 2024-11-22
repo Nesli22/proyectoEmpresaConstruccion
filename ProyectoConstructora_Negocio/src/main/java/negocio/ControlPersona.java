@@ -4,7 +4,7 @@
  */
 package negocio;
 
-import clases.dominio.Persona;
+import dominio.Persona;
 import datos.FachadaDatos;
 import interfaces.IDatos;
 import java.util.List;

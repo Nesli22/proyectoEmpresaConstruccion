@@ -4,8 +4,8 @@
  */
 package datos;
 
-import clases.dominio.Activo;
-import clases.dominio.Mantenimiento;
+import dominio.Activo;
+import dominio.Mantenimiento;
 import java.util.List;
 import javax.persistence.EntityManager;
 

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package negocio;
-import clases.dominio.Mantenimiento;
+import dominio.Mantenimiento;
 import datos.FachadaDatos;
 import interfaces.IDatos;
 import java.util.List;

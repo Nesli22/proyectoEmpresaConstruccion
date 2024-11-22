@@ -1,7 +1,7 @@
 
 package presentacion;
 
-import clases.dominio.Activo;
+import dominio.Activo;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;

@@ -4,9 +4,9 @@
  */
 package interfaces;
 
-import clases.dominio.Activo;
-import clases.dominio.Mantenimiento;
-import clases.dominio.Persona;
+import dominio.Activo;
+import dominio.Mantenimiento;
+import dominio.Persona;
 import java.util.List;
 
 /**
