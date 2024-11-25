@@ -33,4 +33,5 @@ public interface INegocio {
     
     public List<Mantenimiento> consultarMantenimientos();
 
+    public List<Activo> recuperarActivoAlertas();
 }

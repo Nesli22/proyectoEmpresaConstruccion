@@ -23,5 +23,6 @@ public interface IDatos {
       public Activo buscarActivoId(Long id);
       public List<Mantenimiento> consultarMantenimientos();
       public Boolean registrarMantenimiento(Mantenimiento mantenimiento);
+      public List<Activo> recuperarActivoAlertas();
 
 }

@@ -45,5 +45,9 @@ public class ControlActivo {
     public Activo buscarActivoId(Long Id){
         return datos.buscarActivoId(Id);
     }
+    
+    public  List<Activo>  consultarActivoAlertas(){
+        return datos.recuperarActivoAlertas();
+    }
 
 }

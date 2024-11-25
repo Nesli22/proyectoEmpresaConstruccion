@@ -211,8 +211,29 @@ public class ActivoDAO {
         return activoEncontrado;
     }
 
-   
+   public List<Activo> consultarActivosNoOperativos() {
+    EntityManager entityManager = null;
+    List<Activo> listaActivosNoOperativos = new ArrayList<>();
 
-   
-
+    try {
+     
+        entityManager = conexion.getEM();     
+        entityManager.getTransaction().begin();
+      
+        listaActivosNoOperativos = entityManager.createQuery(
+                "SELECT a FROM Activo a WHERE a.estado = :estado", Activo.class)
+                .setParameter("estado", "No operativa")
+                .getResultList();  
+        entityManager.getTransaction().commit();
+    } catch (Exception e) {
+       
+        e.printStackTrace();
+    } finally {
+       
+        if (entityManager != null && entityManager.getTransaction().isActive()) {
+            entityManager.close();
+        }
+    }
+    return listaActivosNoOperativos;
+}
 }

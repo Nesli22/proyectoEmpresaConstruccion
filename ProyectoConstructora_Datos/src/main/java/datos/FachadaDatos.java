@@ -66,4 +66,9 @@ public class FachadaDatos implements IDatos{
         return mant.registrarActivo(mantenimiento);
     }
 
+    @Override
+    public List<Activo> recuperarActivoAlertas() {
+       return activ.consultarActivosNoOperativos();
+    }
+
 }

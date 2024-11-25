@@ -64,5 +64,10 @@ public class FachadaNegocio implements INegocio {
     public List<Mantenimiento> consultarMantenimientos() {
         return mant.consultarMantenimiento();
     }
+
+    @Override
+    public List<Activo> recuperarActivoAlertas() {
+       return activ.consultarActivoAlertas();
+    }
     
 }
