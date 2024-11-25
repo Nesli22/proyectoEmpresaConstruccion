@@ -5,6 +5,7 @@
 package interfaces;
 
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Mantenimiento;
 import dominio.Persona;
 import java.util.List;
@@ -24,5 +25,9 @@ public interface IDatos {
       public List<Mantenimiento> consultarMantenimientos();
       public Boolean registrarMantenimiento(Mantenimiento mantenimiento);
       public List<Activo> recuperarActivoAlertas();
+      public List<Alerta> recuperarAlertasSinRevisar();
+      public Boolean registrarAlerta(Alerta alerta);
+      public Boolean actualizarEstadoARevisadoPorActivo(Activo activo);
+      public Boolean eliminarAlertaPorActivo(Activo activo);
 
 }

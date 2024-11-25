@@ -6,6 +6,7 @@ package datos;
 
 import interfaces.IDatos;
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Mantenimiento;
 import dominio.Persona;
 import java.util.List;
@@ -19,6 +20,7 @@ public class FachadaDatos implements IDatos{
     private PersonaDAO persona = new PersonaDAO();
     private ActivoDAO activ = new ActivoDAO();
     private MantenimientoDAO mant = new MantenimientoDAO();
+    private AlertaDAO alert = new AlertaDAO();
     
     @Override
     public Boolean registrarActivo(Activo activo) {
@@ -70,5 +72,27 @@ public class FachadaDatos implements IDatos{
     public List<Activo> recuperarActivoAlertas() {
        return activ.consultarActivosNoOperativos();
     }
+
+    @Override
+    public List<Alerta> recuperarAlertasSinRevisar() {
+      return alert.recuperarAlertasSinRevisar();
+    }
+
+    @Override
+    public Boolean registrarAlerta(Alerta alerta) {
+       return alert.registrarAlerta(alerta);
+    }
+
+    @Override
+    public Boolean actualizarEstadoARevisadoPorActivo(Activo activo) {
+       return alert.actualizarEstadoARevisadoPorActivo(activo);
+    }
+
+    @Override
+    public Boolean eliminarAlertaPorActivo(Activo activo) {
+       return alert.eliminarAlertasPorActivo(activo);
+    }
+
+  
 
 }

@@ -6,6 +6,7 @@ package negocio;
 
 import interfaces.INegocio;
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Mantenimiento;
 import dominio.Persona;
 import java.util.List;
@@ -19,6 +20,7 @@ public class FachadaNegocio implements INegocio {
     private ControlActivo activ = new ControlActivo();
     private ControlPersona persona = new ControlPersona();
     private ControlMantenimiento mant = new ControlMantenimiento();
+    private ControlAlertas alert= new ControlAlertas();
     
     @Override
     public Boolean registrarActivo(Activo activo) {
@@ -68,6 +70,26 @@ public class FachadaNegocio implements INegocio {
     @Override
     public List<Activo> recuperarActivoAlertas() {
        return activ.consultarActivoAlertas();
+    }
+
+    @Override
+    public List<Alerta> recuperarAlertasSinRevisar() {
+       return alert.recuperarAlertasSinRevisar();
+    }
+
+    @Override
+    public Boolean registrarAlerta(Alerta alerta) {
+        return alert.registrarAlerta(alerta);
+    }
+
+    @Override
+    public Boolean actualizarEstadoARevisadoPorActivo(Activo activo) {
+         return alert.actualizarEstadoARevisadoPorActivo(activo);
+    }
+
+    @Override
+    public Boolean eliminarAlertaPorActivo(Activo activo) {
+          return alert.eliminarAlertaPorActivo(activo);
     }
     
 }

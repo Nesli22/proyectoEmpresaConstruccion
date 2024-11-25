@@ -5,6 +5,7 @@
 package presentacion;
 
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Persona;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
@@ -25,8 +26,7 @@ public class FrmEditarActivo extends javax.swing.JFrame {
     INegocio negocio;
     private List<Persona> listaPersonas;
 
-
-    public FrmEditarActivo(Activo activo,List<Persona> personas) {
+    public FrmEditarActivo(Activo activo, List<Persona> personas) {
         negocio = new FachadaNegocio();
         initComponents();
 
@@ -43,11 +43,11 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         // Convertir la fecha de adquisición a Date y asignarla al JDateChooser
         Date fechaAdquisicion = activo.getFechaAdquisicion();
         date.setDate(fechaAdquisicion);
-        
+
         this.listaPersonas = personas;
         llenarCombo(listaPersonas);
     }
-    
+
     public void llenarCombo(List<Persona> listaPersonas) {
 
         cmbPersonas.removeAllItems();
@@ -56,9 +56,7 @@ public class FrmEditarActivo extends javax.swing.JFrame {
             cmbPersonas.addItem(persona);
         }
     }
-    
 
-    
     private FrmEditarActivo() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -76,23 +74,48 @@ public class FrmEditarActivo extends javax.swing.JFrame {
         String estado = (String) cmbEstado.getSelectedItem();
         String numeroSerie = txtNumeroSerie.getText().trim();
         Date fechaSeleccionada = date.getDate();
-        Persona persona  = (Persona) cmbPersonas.getSelectedItem();
+        Persona persona = (Persona) cmbPersonas.getSelectedItem();
         String ubicacion = txtUbicacion.getText().trim();
         String costo = txtCosto.getText().trim();
 
         // Crear el objeto Activo
         Activo activo = new Activo(id, nombre, tipo, numeroSerie, costo, estado, fechaSeleccionada, ubicacion, persona);
-        negocio.editarActivo(activo);
-        // Registrar el activo utilizando el método de negocio
+
+       
         if (negocio.editarActivo(activo)) {
+           
+            List<Alerta> alertasPendientes = negocio.recuperarAlertasSinRevisar()
+                    .stream()
+                    .filter(alerta -> alerta.getActivo().getId().equals(activo.getId()))
+                    .toList();
+
+         
+            if (!"No operativa".equalsIgnoreCase(estado)) {
+                if (!alertasPendientes.isEmpty()) {
+                    negocio.actualizarEstadoARevisadoPorActivo(activo);
+                }
+            }
+
+         
+            if ("No operativa".equalsIgnoreCase(estado)) {
+                if (alertasPendientes.isEmpty()) {
+                    Alerta nuevaAlerta = new Alerta();
+                    nuevaAlerta.setActivo(activo);
+                    nuevaAlerta.setEstado("Pendiente");
+                    negocio.registrarAlerta(nuevaAlerta);
+                }
+            }
+
+            
             JOptionPane.showMessageDialog(null, "Activo editado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
         } else {
+            
             JOptionPane.showMessageDialog(null, "Error al editar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 // Método para validar los campos
-     private boolean validarCampos() {
+    private boolean validarCampos() {
         if (txtNombre.getText().trim().isEmpty()
                 || cmbTipo.getSelectedItem() == null
                 || txtNumeroSerie.getText().trim().isEmpty()
@@ -346,8 +369,8 @@ public class FrmEditarActivo extends javax.swing.JFrame {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         editarActivo();
-        
-         FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
+
+        FrmModificarActivo frmModificarActvio = new FrmModificarActivo();
 
         frmModificarActvio.setVisible(true);
 

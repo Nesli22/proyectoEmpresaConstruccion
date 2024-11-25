@@ -4,7 +4,9 @@
  */
 package presentacion;
 
+import datos.AlertaDAO;
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Persona;
 import interfaces.INegocio;
 import java.awt.Color;
@@ -39,40 +41,60 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
         }
     }
 
-    public void agregarActivoConDetalles() {
+  public void agregarActivoConDetalles() {
 
-        if (!validarCampos()) {
-            return;
+    // Validar los campos antes de continuar
+    if (!validarCampos()) {
+        return;
+    }
+
+    // Obtener los valores del formulario
+    String nombre = txtNombre.getText();
+    String tipo = (String) cmbTipo.getSelectedItem();
+    String numeroSerie = txtNumeroSerie.getText();
+    Date fechaSeleccionada = date.getDate();
+    Persona responsable = (Persona) cmbPersonas.getSelectedItem();
+    String estado = (String) cmbEstado.getSelectedItem();
+    String ubicacion = txtUbicacion.getText();
+    String costo = txtCosto.getText();
+
+    // Generar un ID aleatorio
+    long id = generarIdAleatorio();
+
+    // Crear el objeto Activo
+    Activo activo = new Activo(id, nombre, tipo, numeroSerie, costo, estado, fechaSeleccionada, ubicacion, responsable);
+
+    // Registrar el activo
+    if (negocio.registrarActivo(activo)) {
+        // Verificar si el estado del activo es "No operativa"
+        if (activo.getEstado().equals("No Operativa")) {
+            // Crear una alerta asociada a este activo
+   
+            Alerta alerta = new Alerta(); // Crear una nueva alerta
+            alerta.setActivo(activo); // Relacionar la alerta con el activo
+            alerta.setEstado("Pendiente"); // Estado inicial de la alerta
+
+            // Registrar la alerta
+          negocio.registrarAlerta(alerta);
+
+           
         }
-
-        String nombre = txtNombre.getText();
-        String tipo = (String) cmbTipo.getSelectedItem();
-        String numeroSerie = txtNumeroSerie.getText();
-        Date fechaSeleccionada = date.getDate();
-        Persona responsable = (Persona) cmbPersonas.getSelectedItem();
-        String estado = (String) cmbEstado.getSelectedItem();
-        String ubicacion = txtUbicacion.getText();
-        String costo = txtCosto.getText();
-
-        // Generar un ID aleatorio
-        long id = generarIdAleatorio();
-
-        Activo activo = new Activo(id, nombre, tipo, numeroSerie, costo, estado, fechaSeleccionada, ubicacion, responsable);
-
-        if (negocio.registrarActivo(activo)) {
-            JOptionPane.showMessageDialog(null, "Activo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-
-          
-            FrmMenuControlarRegistro frmMenuControlarRegistro = new FrmMenuControlarRegistro();
-            frmMenuControlarRegistro.setVisible(true);
+        JOptionPane.showMessageDialog(null, "Activo registrado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
         
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al registrar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
-        }
 
+        // Abrir la ventana de control del registro de activos
+        FrmMenuControlarRegistro frmMenuControlarRegistro = new FrmMenuControlarRegistro();
+        frmMenuControlarRegistro.setVisible(true);
+
+        // Cerrar la ventana actual
+        this.dispose();
+
+    } else {
+        JOptionPane.showMessageDialog(null, "Error al registrar el activo.", "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
+
 
 private boolean validarCampos() {
     String nombre = txtNombre.getText().trim();

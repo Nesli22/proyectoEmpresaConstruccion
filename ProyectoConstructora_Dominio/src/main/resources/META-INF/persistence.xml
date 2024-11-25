@@ -5,6 +5,7 @@
     <class>dominio.Mantenimiento</class>
     <class>dominio.Activo</class>
     <class>dominio.Persona</class>
+    <class>dominio.Alerta</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/constructora?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

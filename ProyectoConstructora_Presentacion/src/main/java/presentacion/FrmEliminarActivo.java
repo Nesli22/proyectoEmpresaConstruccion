@@ -5,6 +5,7 @@
 package presentacion;
 
 import dominio.Activo;
+import dominio.Alerta;
 import interfaces.INegocio;
 import java.awt.Color;
 import java.util.List;
@@ -186,22 +187,29 @@ public class FrmEliminarActivo extends javax.swing.JFrame {
         jt.setModel(modelo);
     }
     
-    public void eliminarActivo() {
-        // Obtener el índice de la fila seleccionada
-        int filaSeleccionada = tablaActivos.getSelectedRow();
+  public void eliminarActivo() {
+    // Obtener el índice de la fila seleccionada
+    int filaSeleccionada = tablaActivos.getSelectedRow();
 
-        if (filaSeleccionada != -1) { // Si hay una fila seleccionada
-            // Obtener los valores de la fila seleccionada (ID del activo)
-            Long id = (Long) tablaActivos.getValueAt(filaSeleccionada, 0);
+    if (filaSeleccionada != -1) { // Si hay una fila seleccionada
+        // Obtener los valores de la fila seleccionada (ID del activo)
+        Long id = (Long) tablaActivos.getValueAt(filaSeleccionada, 0);
 
-            // Confirmación antes de eliminar
-            int confirmacion = JOptionPane.showConfirmDialog(this,
-                    "¿Estás seguro de que deseas eliminar este activo?",
-                    "Confirmar eliminación",
-                    JOptionPane.YES_NO_OPTION);
+        // Confirmación antes de eliminar
+        int confirmacion = JOptionPane.showConfirmDialog(this,
+                "¿Estás seguro de que deseas eliminar este activo?",
+                "Confirmar eliminación",
+                JOptionPane.YES_NO_OPTION);
 
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                // Llamar al método de eliminación
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            // Obtener el activo antes de eliminarlo
+            Activo activo = negocio.buscarActivoId(id);
+
+            if (activo != null) {
+                // Eliminar todas las alertas asociadas al activo
+                negocio.eliminarAlertaPorActivo(activo);
+
+                // Ahora sí, eliminar el activo
                 boolean eliminado = this.negocio.eliminarActivoPorId(id);
 
                 if (eliminado) {
@@ -212,11 +220,16 @@ public class FrmEliminarActivo extends javax.swing.JFrame {
                     // Si no se pudo eliminar, mostrar un mensaje
                     JOptionPane.showMessageDialog(this, "No se pudo eliminar el activo.");
                 }
+            } else {
+                JOptionPane.showMessageDialog(this, "El activo no existe.");
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona un activo para eliminar.");
         }
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, selecciona un activo para eliminar.");
     }
+}
+
+
 
     /**
      * @param args the command line arguments
