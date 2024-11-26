@@ -10,10 +10,15 @@ import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
@@ -27,7 +32,21 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
         negocio = new FachadaNegocio();
         initComponents();
         fldId.setText(String.valueOf(activo.getId()));
-        
+
+        // Configura el JSpinner para la selección de hora con la hora predeterminada a las 00:00
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);  // Establece la hora en 00
+        calendar.set(Calendar.MINUTE, 0);       // Establece los minutos en 00
+        calendar.set(Calendar.SECOND, 0);       // Establece los segundos en 00
+        calendar.set(Calendar.MILLISECOND, 0);  // Establece los milisegundos en 0
+
+        // Configuramos el SpinnerDateModel con el valor predeterminado
+        SpinnerDateModel dateModel = new SpinnerDateModel(calendar.getTime(), null, null, Calendar.HOUR_OF_DAY);
+        horajsp.setModel(dateModel);
+
+        // Usamos un editor de SpinnerDateEditor con el formato de hora "HH:mm"
+        horajsp.setEditor(new JSpinner.DateEditor(horajsp, "HH:mm"));
+
     }
 
     private FrmAsignarMantenimiento() {
@@ -54,8 +73,19 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
         // Busca el activo en una lista o base de datos
         Activo activo = negocio.buscarActivoId(idActivo); // Define el método `obtenerActivoPorId` que devuelve un Activo
 
-        Mantenimiento mantenimiento = new Mantenimiento(id, fechaSeleccionada,tipo, activo);
-        // Registrar el activo utilizando el método de negocio
+        // Tomar la hora seleccionada del JSpinner
+        Date horaSeleccionada = (Date) horajsp.getValue();
+
+        // Usar Calendar para manipular la fecha y hora
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaSeleccionada); // Establecer la fecha seleccionada
+        calendar.set(Calendar.HOUR_OF_DAY, horaSeleccionada.getHours()); // Establecer la hora
+        calendar.set(Calendar.MINUTE, horaSeleccionada.getMinutes()); // Establecer los minutos
+
+        // El objeto Mantenimiento ahora recibe un Calendar en lugar de un Date
+        Mantenimiento mantenimiento = new Mantenimiento(id, calendar, tipo, activo);
+
+        // Registrar el mantenimiento utilizando el método de negocio
         if (negocio.registrarMantenimiento(mantenimiento)) {
             JOptionPane.showMessageDialog(null, "Mantenimiento programado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
@@ -74,11 +104,25 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
 
         Date fechaSeleccionada = date.getDate();
 
+        // Verificar que se haya seleccionado una fecha
+        if (fechaSeleccionada == null) {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione una fecha válida.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
 
         LocalDate fechaActual = LocalDate.now();
         LocalDate fechaIngresada = fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         if (fechaIngresada.isBefore(fechaActual)) {
             JOptionPane.showMessageDialog(null, "La fecha no puede ser menor a la fecha actual.", "Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validación de formato: se asegura que la fecha ingresada tenga el formato correcto
+        try {
+            // Comprobamos que la fecha seleccionada sea válida
+            fechaSeleccionada.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "La fecha ingresada no es válida. Intente nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
 
@@ -114,6 +158,8 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
         date = new com.toedter.calendar.JDateChooser();
         btnGuardar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        horajsp = new javax.swing.JSpinner();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel4.setText("Nombre:");
@@ -174,14 +220,14 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Tipo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 170, -1, -1));
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Preventivo", "Correctivo", "Otro" }));
-        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 160, 260, -1));
+        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, 260, -1));
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel5.setText("Fecha de mantenimiento:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 20));
+        jLabel5.setText("Hora de mantenimiento:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, -1, 20));
         jPanel1.add(date, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 220, 260, -1));
 
         btnGuardar.setBackground(new java.awt.Color(0, 153, 204));
@@ -206,6 +252,11 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("ID:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, -1, -1));
+        jPanel1.add(horajsp, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 270, 100, -1));
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setText("Fecha de mantenimiento:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -296,10 +347,12 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbTipo;
     private com.toedter.calendar.JDateChooser date;
     private javax.swing.JLabel fldId;
+    private javax.swing.JSpinner horajsp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

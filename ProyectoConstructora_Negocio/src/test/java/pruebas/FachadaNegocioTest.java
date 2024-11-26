@@ -6,6 +6,8 @@ import dominio.Mantenimiento;
 import dominio.Persona;
 import interfaces.INegocio;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -179,29 +181,35 @@ class FachadaNegocioTest {
         assertFalse(mantenimientos.isEmpty(), "La lista de mantenimientos debería contener al menos un mantenimiento");
     }
 
-    @Test
-    @DisplayName("Registrar un mantenimiento correctamente")
-    void registrarMantenimientoTest() {
-        // Registrar el activo de prueba
-        Activo activo = crearActivoPrueba();
-        boolean exitoActivo = fachadaNegocio.registrarActivo(activo);
-        assertTrue(exitoActivo, "El registro del activo debería ser exitoso");
+   @Test
+@DisplayName("Registrar un mantenimiento correctamente")
+void registrarMantenimientoTest() {
+    // Registrar el activo de prueba
+    Activo activo = crearActivoPrueba();
+    boolean exitoActivo = fachadaNegocio.registrarActivo(activo);
+    assertTrue(exitoActivo, "El registro del activo debería ser exitoso");
 
-        // Verificar que el ID del activo no sea nulo
-        assertNotNull(activo.getId(), "El ID del activo debería haberse generado");
+    // Verificar que el ID del activo no sea nulo
+    assertNotNull(activo.getId(), "El ID del activo debería haberse generado");
 
-        // Crear el mantenimiento asociado al activo registrado
-        Mantenimiento mantenimiento = new Mantenimiento(1l, Date.from(Instant.now()), "Otro", activo);
-        boolean exitoMantenimiento = fachadaNegocio.registrarMantenimiento(mantenimiento);
-        assertTrue(exitoMantenimiento, "El registro del mantenimiento debería ser exitoso");
-    }
+    // Crear el mantenimiento asociado al activo registrado
+    Calendar calendar = Calendar.getInstance(); // Usar Calendar en lugar de LocalDateTime
+    Mantenimiento mantenimiento = new Mantenimiento(1L, calendar, "Otro", activo);
 
-    private Activo crearActivoPrueba() {
-        return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", Date.from(Instant.now()));
-    }
+    boolean exitoMantenimiento = fachadaNegocio.registrarMantenimiento(mantenimiento);
+    assertTrue(exitoMantenimiento, "El registro del mantenimiento debería ser exitoso");
+}
 
-    private Mantenimiento crearMantenimientoPrueba() {
-        Activo act = crearActivoPrueba();
-        return new Mantenimiento(1L, Date.from(Instant.now()), "Otro", act);
-    }
+private Activo crearActivoPrueba() {
+    return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", new Date()); // Usamos new Date() para obtener la fecha actual
+}
+
+
+  
+   private Mantenimiento crearMantenimientoPrueba() {
+    Activo act = crearActivoPrueba();
+    Calendar calendar = Calendar.getInstance();
+    return new Mantenimiento(1L, calendar, "Otro", act);
+}
+
 }

@@ -6,7 +6,10 @@ import negocio.FachadaNegocio;
 import interfaces.INegocio;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -85,7 +88,7 @@ public class FrmConsultarMantenimientos extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Fecha", "Tipo", "Activo"
+                "Fecha y Hora", "Tipo", "Activo"
             }
         ));
         jScrollPane1.setViewportView(tablaMantenimientos);
@@ -180,28 +183,40 @@ public class FrmConsultarMantenimientos extends javax.swing.JFrame {
  
 
     private void rellenarTablaActivos(JTable jt, List<Mantenimiento> mantenimientos) {
-        DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
-        modelo.setRowCount(0);
+    DefaultTableModel modelo = (DefaultTableModel) jt.getModel();
+    modelo.setRowCount(0);
 
-        if (mantenimientos != null && !mantenimientos.isEmpty()) {
-            for (Mantenimiento mantenimiento : mantenimientos) {
-                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato de fecha deseado
-                
-                String tipo = mantenimiento.getTipo();                
-                Date fecha =  mantenimiento.getFecha();
-                String fechaFormateada = (fecha != null) ? dateFormat.format(fecha) : "Sin fecha";
-                
-                Activo activo = mantenimiento.getActivo(); // Suponiendo que este es el ID del activo
-                String NombreAct = activo.getNombre();
+    if (mantenimientos != null && !mantenimientos.isEmpty()) {
+        // Formato de fecha para LocalDateTime
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
-                modelo.addRow(new Object[]{fechaFormateada, tipo, NombreAct});
+        for (Mantenimiento mantenimiento : mantenimientos) {
+            String tipo = mantenimiento.getTipo();
+            Calendar fecha = mantenimiento.getFecha();
+
+            // Verificar si la fecha no es nula
+            if (fecha != null) {
+                // Convertir Calendar a LocalDateTime
+                LocalDateTime fechaLocalDateTime = LocalDateTime.ofInstant(fecha.toInstant(), ZoneId.systemDefault());
+
+                // Formatear fecha LocalDateTime
+                String fechaFormateada = fechaLocalDateTime.format(dateFormatter);
+
+                Activo activo = mantenimiento.getActivo();
+                String nombreActivo = activo.getNombre();
+
+                // Agregar una fila a la tabla
+                modelo.addRow(new Object[]{fechaFormateada, tipo, nombreActivo});
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "No se encontraron mantenimientos para mostrar.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        jt.setModel(modelo);
+    } else {
+        JOptionPane.showMessageDialog(this, "No se encontraron mantenimientos para mostrar.", "Sin resultados", JOptionPane.INFORMATION_MESSAGE);
     }
+
+    jt.setModel(modelo);
+}
+
+
 
     private List<Mantenimiento> consultarMantenimientos() {
         return negocio.consultarMantenimientos();

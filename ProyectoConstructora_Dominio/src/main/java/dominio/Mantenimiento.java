@@ -9,6 +9,8 @@ package dominio;
  * @author IVAN
  */
 
+import java.time.LocalDateTime;
+import java.util.Calendar;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +22,7 @@ import java.util.Date;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.eclipse.persistence.jpa.jpql.parser.DateTime;
 
 @Entity
 @Table(name = "Mantenimiento")
@@ -29,9 +32,9 @@ public class Mantenimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    private Calendar fechayhora;
+   
     private String tipo;
 
     @ManyToOne
@@ -42,21 +45,24 @@ public class Mantenimiento {
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
-    public Date getFecha() { return fecha; }
-    public void setFecha(Date fecha) { this.fecha = fecha; }
+    public Calendar getFecha() { return fechayhora; }
+    public void setFecha(Calendar fecha) { this.fechayhora = fecha; }
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
 
     public Activo getActivo() { return activo; }
     public void setActivo(Activo activo) { this.activo = activo; }
+    
 
-    public Mantenimiento(Long id, Date fecha, String tipo, Activo activo) {
+    public Mantenimiento(Long id, Calendar fechayhora, String tipo, Activo activo) {
         this.id = id;
-        this.fecha = fecha;
+        this.fechayhora = fechayhora;
         this.tipo = tipo;
         this.activo = activo;
     }
+    
+    
 
     public Mantenimiento() {
     }

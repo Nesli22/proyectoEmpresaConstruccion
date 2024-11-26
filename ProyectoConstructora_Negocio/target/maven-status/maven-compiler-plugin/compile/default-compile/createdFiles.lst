@@ -1,7 +1,1 @@
-negocio\FachadaNegocio.class
-negocio\ControlAlertas.class
-negocio\ControlPersona.class
-negocio\ControlMantenimiento.class
-negocio\ControlActivo.class
-interfaces\INegocio.class
-.netbeans_automatic_build
+negocio/ControlAlertas.class
