@@ -115,6 +115,7 @@ private void cargarAlertas() {
     
     for (Activo activo : listaActivos) {
         JPanel card = crearCardActivo(activo);
+        this.negocio.actualizarEstadoARevisadoPorActivo(activo);
         panelScroll.add(card);
         // Añadir espacio entre tarjetas
         panelScroll.add(Box.createRigidArea(new Dimension(0, 10)));
