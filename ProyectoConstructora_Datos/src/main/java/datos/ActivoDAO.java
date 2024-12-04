@@ -6,6 +6,7 @@ package datos;
 
 import dominio.Activo;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -211,29 +212,31 @@ public class ActivoDAO {
         return activoEncontrado;
     }
 
-   public List<Activo> consultarActivosNoOperativos() {
-    EntityManager entityManager = null;
-    List<Activo> listaActivosNoOperativos = new ArrayList<>();
+    public List<Activo> consultarActivosNoOperativos() {
+        EntityManager entityManager = null;
+        List<Activo> listaActivosNoOperativosMantenimiento = new ArrayList<>();
 
-    try {
-     
-        entityManager = conexion.getEM();     
-        entityManager.getTransaction().begin();
-      
-        listaActivosNoOperativos = entityManager.createQuery(
-                "SELECT a FROM Activo a WHERE a.estado = :estado", Activo.class)
-                .setParameter("estado", "No operativa")
-                .getResultList();  
-        entityManager.getTransaction().commit();
-    } catch (Exception e) {
-       
-        e.printStackTrace();
-    } finally {
-       
-        if (entityManager != null && entityManager.getTransaction().isActive()) {
-            entityManager.close();
+        try {
+            // Obtener el EntityManager
+            entityManager = conexion.getEM();
+            entityManager.getTransaction().begin();
+
+            // Consultar activos con estado "No operativa"
+            listaActivosNoOperativosMantenimiento = entityManager.createQuery(
+                    "SELECT a FROM Activo a WHERE a.estado = 'No operativa' OR a.estado = 'Mantenimiento'", Activo.class)
+                    .getResultList();
+
+            entityManager.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            // Asegurarse de cerrar el EntityManager si la transacción está activa
+            if (entityManager != null && entityManager.getTransaction().isActive()) {
+                entityManager.close();
+            }
         }
+        return listaActivosNoOperativosMantenimiento;
     }
-    return listaActivosNoOperativos;
-}
+
+
 }

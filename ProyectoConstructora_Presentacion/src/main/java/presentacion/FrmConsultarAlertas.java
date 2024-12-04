@@ -86,13 +86,24 @@ public class FrmConsultarAlertas extends javax.swing.JFrame {
     // Panel para Estado
     JPanel estadoPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
     estadoPanel.setBackground(Color.WHITE);
-    JLabel lblEstado = new JLabel("No Operativa");
-    lblEstado.setFont(new Font("Roboto", Font.PLAIN, 12));
-    lblEstado.setForeground(new Color(255, 100, 100));
-    lblEstado.setBackground(new Color(255, 240, 240));
-    lblEstado.setOpaque(true);
-    lblEstado.setBorder(BorderFactory.createEmptyBorder(3, 8, 3, 8));
-    estadoPanel.add(lblEstado);
+    
+     if ("No Operativa".equals(activo.getEstado())) {
+         JLabel lblEstado = new JLabel("No Operativa");
+         lblEstado.setFont(new Font("Roboto", Font.PLAIN, 12));
+         lblEstado.setForeground(new Color(255, 100, 100));
+         lblEstado.setBackground(new Color(255, 240, 240));
+         lblEstado.setOpaque(true);
+         lblEstado.setBorder(BorderFactory.createEmptyBorder(3, 8, 3, 8));
+         estadoPanel.add(lblEstado);
+     } else if("Mantenimiento".equals(activo.getEstado())){
+         JLabel lblEstado = new JLabel("Mantenimiento");
+         lblEstado.setFont(new Font("Roboto", Font.PLAIN, 12));
+         lblEstado.setForeground(new Color(255, 100, 100));
+         lblEstado.setBackground(new Color(255, 240, 240));
+         lblEstado.setOpaque(true);
+         lblEstado.setBorder(BorderFactory.createEmptyBorder(3, 8, 3, 8));
+         estadoPanel.add(lblEstado);
+     }
     
     // Agregar todos los paneles a la tarjeta
     card.add(idPanel);
@@ -110,7 +121,6 @@ private void cargarAlertas() {
             "Información", JOptionPane.INFORMATION_MESSAGE);
         return;
     }
-
     panelScroll.removeAll(); // Limpiar el panel antes de agregar nuevas tarjetas
     
     for (Activo activo : listaActivos) {
