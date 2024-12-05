@@ -34,7 +34,7 @@ public class FrmMenu extends javax.swing.JFrame {
 
     private void mostrarMensajeAlertas() {
         // Crear un mensaje de advertencia
-        String mensaje = "Hay " + listaAlertas.size() + " activos con alertas.\n¿Deseas consultarlas?";
+        String mensaje = "Hay activos con alertas sin revisar, ¿Deseas consultarlas?";
 
         // Mostrar el JOptionPane con dos opciones
         int opcion = JOptionPane.showOptionDialog(

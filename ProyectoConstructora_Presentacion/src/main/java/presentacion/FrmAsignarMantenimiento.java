@@ -5,6 +5,7 @@
 package presentacion;
 
 import dominio.Activo;
+import dominio.Alerta;
 import dominio.Mantenimiento;
 import negocio.FachadaNegocio;
 import interfaces.INegocio;
@@ -85,13 +86,23 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
         // El objeto Mantenimiento ahora recibe un Calendar en lugar de un Date
         Mantenimiento mantenimiento = new Mantenimiento(id, calendar, tipo, activo);
 
-        // Registrar el mantenimiento utilizando el método de negocio
         if (negocio.registrarMantenimiento(mantenimiento)) {
+            // Crear una alerta relacionada al activo
+            Alerta alerta = new Alerta();
+            alerta.setActivo(activo); // Relacionar la alerta con el activo
+            alerta.setEstado("Pendiente"); // Estado inicial de la alerta
+
+            // Registrar la alerta
+            negocio.registrarAlerta(alerta);
+
+            // Mostrar mensaje de éxito
             JOptionPane.showMessageDialog(null, "Mantenimiento programado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
 
+            // Navegar al menú principal
             FrmMenu frmMenu = new FrmMenu();
             frmMenu.setVisible(true);
 
+            // Cerrar la ventana actual
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Error al programar el Mantenimiento.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -282,9 +293,9 @@ public class FrmAsignarMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVolverMouseExited
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
-        FrmMenuControlarRegistro frmRegistrarActivos = new FrmMenuControlarRegistro();
+        FrmProgramarMantenimiento frmProgramarMantenimiento = new FrmProgramarMantenimiento();
 
-        frmRegistrarActivos.setVisible(true);
+        frmProgramarMantenimiento.setVisible(true);
 
         dispose();
     }//GEN-LAST:event_btnVolverActionPerformed

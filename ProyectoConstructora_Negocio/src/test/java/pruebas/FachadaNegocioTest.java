@@ -181,35 +181,33 @@ class FachadaNegocioTest {
         assertFalse(mantenimientos.isEmpty(), "La lista de mantenimientos debería contener al menos un mantenimiento");
     }
 
-   @Test
-@DisplayName("Registrar un mantenimiento correctamente")
-void registrarMantenimientoTest() {
-    // Registrar el activo de prueba
-    Activo activo = crearActivoPrueba();
-    boolean exitoActivo = fachadaNegocio.registrarActivo(activo);
-    assertTrue(exitoActivo, "El registro del activo debería ser exitoso");
+    @Test
+    @DisplayName("Registrar un mantenimiento correctamente")
+    void registrarMantenimientoTest() {
+        // Registrar el activo de prueba
+        Activo activo = crearActivoPrueba();
+        boolean exitoActivo = fachadaNegocio.registrarActivo(activo);
+        assertTrue(exitoActivo, "El registro del activo debería ser exitoso");
 
-    // Verificar que el ID del activo no sea nulo
-    assertNotNull(activo.getId(), "El ID del activo debería haberse generado");
+        // Verificar que el ID del activo no sea nulo
+        assertNotNull(activo.getId(), "El ID del activo debería haberse generado");
 
-    // Crear el mantenimiento asociado al activo registrado
-    Calendar calendar = Calendar.getInstance(); // Usar Calendar en lugar de LocalDateTime
-    Mantenimiento mantenimiento = new Mantenimiento(1L, calendar, "Otro", activo);
+        // Crear el mantenimiento asociado al activo registrado
+        Calendar calendar = Calendar.getInstance(); // Usar Calendar en lugar de LocalDateTime
+        Mantenimiento mantenimiento = new Mantenimiento(1L, calendar, "Otro", activo);
 
-    boolean exitoMantenimiento = fachadaNegocio.registrarMantenimiento(mantenimiento);
-    assertTrue(exitoMantenimiento, "El registro del mantenimiento debería ser exitoso");
-}
+        boolean exitoMantenimiento = fachadaNegocio.registrarMantenimiento(mantenimiento);
+        assertTrue(exitoMantenimiento, "El registro del mantenimiento debería ser exitoso");
+    }
 
-private Activo crearActivoPrueba() {
-    return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", new Date()); // Usamos new Date() para obtener la fecha actual
-}
+    private Activo crearActivoPrueba() {
+        return new Activo(1L, "ActivoPrueba", "Herramienta", "Operativo", "54321", new Date()); // Usamos new Date() para obtener la fecha actual
+    }
 
-
-  
-   private Mantenimiento crearMantenimientoPrueba() {
-    Activo act = crearActivoPrueba();
-    Calendar calendar = Calendar.getInstance();
-    return new Mantenimiento(1L, calendar, "Otro", act);
-}
+    private Mantenimiento crearMantenimientoPrueba() {
+        Activo act = crearActivoPrueba();
+        Calendar calendar = Calendar.getInstance();
+        return new Mantenimiento(1L, calendar, "Otro", act);
+    }
 
 }

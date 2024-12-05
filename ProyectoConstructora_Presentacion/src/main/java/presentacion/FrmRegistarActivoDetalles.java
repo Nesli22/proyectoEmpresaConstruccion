@@ -67,7 +67,7 @@ public class FrmRegistarActivoDetalles extends javax.swing.JFrame {
     // Registrar el activo
     if (negocio.registrarActivo(activo)) {
         // Verificar si el estado del activo es "No operativa"
-        if (activo.getEstado().equals("No Operativa")) {
+        if (activo.getEstado().equals("No Operativa") || activo.getEstado().equalsIgnoreCase("Mantenimiento")) {
             // Crear una alerta asociada a este activo
    
             Alerta alerta = new Alerta(); // Crear una nueva alerta

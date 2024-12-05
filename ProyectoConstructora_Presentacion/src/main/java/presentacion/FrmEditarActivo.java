@@ -90,21 +90,20 @@ public class FrmEditarActivo extends javax.swing.JFrame {
                     .toList();
 
          
-            if (!"No operativa".equalsIgnoreCase(estado)) {
-                if (!alertasPendientes.isEmpty()) {
-                    negocio.actualizarEstadoARevisadoPorActivo(activo);
-                }
+           if (!"No Operativa".equalsIgnoreCase(estado) && !"Mantenimiento".equalsIgnoreCase(estado)) {
+            if (!alertasPendientes.isEmpty()) {
+                negocio.actualizarEstadoARevisadoPorActivo(activo);
             }
+        } else {
+            // Si el estado es "No Operativa" o "Mantenimiento", crear una nueva alerta si no existen alertas pendientes
+            if (alertasPendientes.isEmpty()) {
+                Alerta nuevaAlerta = new Alerta();
+                nuevaAlerta.setActivo(activo);
+                nuevaAlerta.setEstado("Pendiente");
+                negocio.registrarAlerta(nuevaAlerta);
+            }
+        }
 
-         
-            if ("No operativa".equalsIgnoreCase(estado)) {
-                if (alertasPendientes.isEmpty()) {
-                    Alerta nuevaAlerta = new Alerta();
-                    nuevaAlerta.setActivo(activo);
-                    nuevaAlerta.setEstado("Pendiente");
-                    negocio.registrarAlerta(nuevaAlerta);
-                }
-            }
 
             
             JOptionPane.showMessageDialog(null, "Activo editado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
